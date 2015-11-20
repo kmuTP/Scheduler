@@ -1,0 +1,15 @@
+1.일정추가 : plan_view_title
+2.일정이름 : plan_view_name
+3.일정 쓰는 칸 : plan_text_name
+4.시작 : plan_view_start
+5.시작날짜 : plan_btn_startDate 
+6.시작시간 : plan_btn_startTime
+7.종료 : plan_view_end
+8.종료날짜 : plan_btn_endDate
+9.종료시간 : plan_btn_endTime
+10.메모 : plan_view_content
+11.메모쓰는 칸 : plan_text_content
+12.중요도 : plan_view_rating
+13.중요도 선택 : plan_select_rating
+14.저장버튼 : plan_btn_save
+15.취소버튼 : plan_btn_cancel 
