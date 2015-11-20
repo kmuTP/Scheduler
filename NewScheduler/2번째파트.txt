@@ -1,0 +1,14 @@
+할일: todo_view_title
+제목: todo_view_subject
+뒤로가기: todo_btn_back
+중요도설정/해제: todo_btn_setPriority
+
+상태
+시작전: todo_btn_beforeSchedule
+진행중: todo_btn_ingSchedule
+완료: todo_btn_finSchedule
+
+설명: todo_icon_explanation
+알람: todo_btn_alarm
+삭제: todo_btn_delete
+수정: todo_btn_modification
