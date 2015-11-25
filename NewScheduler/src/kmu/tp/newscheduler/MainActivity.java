@@ -1,10 +1,15 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
-import android.widget.Toast;
-import android.os.Bundle;
+import android.widget.*;
+import android.widget.Button;
+import android.view.*;
+import android.app.Activity;
+import android.app.*;
+import android.os.*;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity {
 
@@ -13,9 +18,19 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Toast.makeText(getApplicationContext(), "김지현 바보", Toast.LENGTH_LONG).show();
+		
+		Button addMenuBtn = (Button) findViewById(R.id.button1);
+		
+		addMenuBtn.setOnClickListener(new OnClickListener(){
+			public void onClick(View v)
+			{
+				Toast.makeText(getApplicationContext(), "김지현 바보", Toast.LENGTH_LONG).show();
+			}
+		});
 		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,4 +50,6 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 }
