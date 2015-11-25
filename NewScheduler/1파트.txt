@@ -1,0 +1,6 @@
+menu_bar:메뉴를 나타나게 해주는 버튼
+rating_star:중요도를 표시하는 버튼
+delete_box:삭제할 일정들 앞에 선택하여 삭제할 수 있도록 선택가능한 박스
+simple-text:일정의 내용을 간단하게 보여주는 텍스트 박스
+plus_box:일정을 추가할수있는 추가버튼
+main_layout:메인 레이아웃
