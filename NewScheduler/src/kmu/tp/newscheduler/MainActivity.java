@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
+		
 		
 		Button addMenuBtn = (Button) findViewById(R.id.addSchedule);
 		addMenuBtn.setOnClickListener(new OnClickListener(){

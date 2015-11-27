@@ -13,6 +13,15 @@ public class DBManager extends SQLiteOpenHelper {
  
     @Override
     public void onCreate(SQLiteDatabase db) {
+    	
+    	//스케줄 테이블 생성
+    	db.execSQL("create table schedule ("
+    			+ "no integer primary key autoincrement,"
+    			+ "subject text,"
+    			+ "startdate blob,"
+    			+ "enddate blob,"
+    			+ "content text,"
+    			+ "favorite integer);");
     }
  
     @Override
