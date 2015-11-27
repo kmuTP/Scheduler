@@ -19,15 +19,20 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
-		Button addMenuBtn = (Button) findViewById(R.id.button1);
-		
+		Button addMenuBtn = (Button) findViewById(R.id.addSchedule);
 		addMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
-				Toast.makeText(getApplicationContext(), "김지현 바보", Toast.LENGTH_LONG).show();
+				//일정 추가 View Load
 			}
 		});
-		
+		Button delMenuBtn = (Button) findViewById(R.id.delSchedule);
+		addMenuBtn.setOnClickListener(new OnClickListener(){
+			public void onClick(View v)
+			{
+				//일정 삭제 View Load
+			}
+		});
 	}
 	
 	
