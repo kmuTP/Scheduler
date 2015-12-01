@@ -1,21 +1,234 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
     tools:context="kmu.tp.newscheduler.MainActivity" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
-        android:orientation="vertical" >
-    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
 
+        <TextView
+            android:id="@+id/plan_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="일정추가"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1" >
+
+        <TextView
+            android:id="@+id/plan_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="제목"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/plan_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/plan_view_name"
+            android:layout_alignBottom="@+id/plan_view_name"
+            android:layout_toRightOf="@+id/plan_view_name"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="제목을 입력하시오"
+            android:inputType="text"
+            android:paddingLeft="20px" >
+
+            <requestFocus />
+        </EditText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout2" >
+
+        <TextView
+            android:id="@+id/plan_view_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="17dp"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="시작"
+            android:textSize="20dp" />
+        
+        <EditText
+            android:id="@+id/plan_btn_startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/plan_view_end"
+            android:layout_alignBaseline="@+id/plan_view_start"
+            android:layout_alignBottom="@+id/plan_view_start"
+            android:layout_toRightOf="@+id/plan_view_start"
+            android:layout_marginLeft="10dp"
+            android:hint="시작 날짜"
+            android:ems="5"
+            android:inputType="date"
+            android:paddingLeft="20px" />
+        <EditText
+            android:id="@+id/plan_btn_startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/plan_btn_startDate"
+            android:layout_alignBottom="@+id/plan_btn_startDate"
+            android:layout_toRightOf="@+id/plan_btn_startDate"
+            android:layout_marginLeft="10dp"
+            android:hint="시작 날짜"
+            android:ems="5"
+            android:inputType="time"
+            android:paddingLeft="20px" />
+
+        <TextView
+	        android:id="@+id/plan_view_end"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="20px"
+	        android:paddingRight="20px"
+	        android:paddingTop="15px"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/plan_view_start"
+	        android:text="종료"
+	        android:textSize="20dp" />
+        
+        
+         <EditText
+            android:id="@+id/plan_btn_endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/plan_view_end"
+            android:layout_alignBaseline="@+id/plan_view_end"
+            android:layout_alignBottom="@+id/plan_view_end"
+            android:layout_toRightOf="@+id/plan_view_end"
+            android:layout_marginLeft="10dp"
+            android:hint="종료 날짜"
+            android:ems="5"
+            android:inputType="date"
+            android:paddingLeft="20px" />
+        <EditText
+            android:id="@+id/plan_btn_endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/plan_btn_endDate"
+            android:layout_alignBottom="@+id/plan_btn_endDate"
+            android:layout_toRightOf="@+id/plan_btn_endDate"
+            android:layout_marginLeft="10dp"
+            android:hint="종료 시간"
+            android:ems="5"
+            android:inputType="time"
+            android:paddingLeft="20px" />
+        
+        
+        <TextView
+	        android:id="@+id/plan_view_content"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="17dp"
+	        android:paddingLeft="20px"
+	        android:paddingRight="20px"
+	        android:paddingTop="15px"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/plan_view_end"
+	        android:text="메모"
+	        android:textSize="20dp" />
+        
+          <EditText
+            android:id="@+id/plan_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_below="@+id/plan_view_content"
+            android:hint="메모할 내용을  입력하시오"
+            android:inputType="textImeMultiLine"
+            android:paddingLeft="20px" 
+            android:minLines="1">
+            <requestFocus />
+        </EditText>
+
+    </RelativeLayout>
+
+       <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+         android:layout_below="@+id/relativeLayout3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+          
+ 		<TextView
+            android:id="@+id/plan_view_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="중요도"
+            android:textSize="20dp" />
+
+ 		<RatingBar
+ 		    android:id="@+id/plan_select_rating"
+ 		    android:layout_width="wrap_content"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_alignParentRight="true"
+ 		    android:layout_alignParentTop="true"
+ 		    android:duplicateParentState="true"
+ 		    style="?android:attr/ratingBarStyleIndicator"
+ 		    android:minHeight="48dp" />
+	           
+     	</RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <Button
+            android:id="@+id/ plan_btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/plan_btn_cancel"
+            android:layout_alignBottom="@+id/plan_btn_cancel"
+            android:layout_toLeftOf="@+id/plan_btn_cancel"
+            android:text="저장" />
+
+        <Button
+            android:id="@+id/plan_btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="취소" />
+    </RelativeLayout>
+
+  
 </RelativeLayout>
