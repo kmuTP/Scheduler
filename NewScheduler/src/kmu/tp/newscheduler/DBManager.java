@@ -14,7 +14,7 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     	
-    	//스케줄 테이블 생성
+    	//onCreate 파일은 db파일이 생성되는 최초 시기에 실행되는 함수이다.
     	db.execSQL("create table schedule ("
     			+ "no integer primary key autoincrement,"
     			+ "subject text,"

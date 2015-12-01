@@ -1,6 +1,8 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.*;
 import android.widget.Button;
 import android.view.*;
@@ -19,6 +21,22 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
+		SQLiteDatabase db = dbManager.getReadableDatabase();
+		//스케줄 목록 호출
+		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
+		
+		//목록이 있는지 확인한다.
+		if(scheduleLists.getCount() == 0) 
+		{
+			
+		}
+		else
+		{
+			while(scheduleLists.moveToNext())
+			{
+				
+			}
+		}
 		
 		
 		Button addMenuBtn = (Button) findViewById(R.id.addSchedule);
