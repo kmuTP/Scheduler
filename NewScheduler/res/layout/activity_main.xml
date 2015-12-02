@@ -8,16 +8,39 @@
     android:paddingTop="0dp"
     tools:context="kmu.tp.newscheduler.MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="33dp"
-        android:background="#ff9999"
-        android:height="50dp"
-        android:padding="5dp"
-        android:text="@+String/2015.11.25\n오픈소스 프로젝트 진행하기" />
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/addSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="일정추가" />
+
+        <Button
+            android:id="@+id/delSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/addSchedule"
+            android:text="일정삭제" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/scheduleListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:background="#f7f7f7" >
+
+    </RelativeLayout>
 
 </RelativeLayout>
