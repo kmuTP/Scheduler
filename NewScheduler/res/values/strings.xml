@@ -4,7 +4,6 @@
     <string name="app_name">NewScheduler</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="일정추가">일정추가</string>
     <string name="plan_text_name">일정제목</string>
     <string name="_2015_11_25_n_">2015.11.25\\n오픈소스 프로젝트 진행하기</string>
 
