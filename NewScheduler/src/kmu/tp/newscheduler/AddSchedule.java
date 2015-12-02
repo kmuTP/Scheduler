@@ -13,6 +13,12 @@ public class AddSchedule extends Activity {
 		setContentView(R.layout.add_schedule);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.add_schedule, menu);
+		return true;
+	}
 	//1
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

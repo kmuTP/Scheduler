@@ -160,15 +160,16 @@
            android:textSize="20dp" />
         
           <EditText
-            android:id="@+id/plan_text_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_below="@+id/plan_view_content"
-            android:hint="메모할 내용을  입력하시오"
-            android:inputType="textImeMultiLine"
-            android:paddingLeft="20px" 
-            android:minLines="1">
+              android:id="@+id/plan_text_content"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/plan_view_content"
+              android:ems="10"
+              android:hint="메모할 내용을  입력하시오"
+              android:inputType="textMultiLine"
+              android:minLines="3"
+              android:paddingLeft="20px" >
+
             <requestFocus />
         </EditText>
 
