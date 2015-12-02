@@ -1,6 +1,7 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.*;
@@ -56,11 +57,12 @@ public class MainActivity extends Activity {
 		addMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
-				//일정 추가 View Load
+				Intent intent = new Intent(MainActivity.this, AddSchedule.class);
+				MainActivity.this.startActivity(intent);
 			}
 		});
 		Button delMenuBtn = (Button) findViewById(R.id.delSchedule);
-		addMenuBtn.setOnClickListener(new OnClickListener(){
+		delMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
 				//일정 삭제 View Load
