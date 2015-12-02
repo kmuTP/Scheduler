@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.widget.*;
 import android.widget.Button;
 import android.widget.FrameLayout.LayoutParams;
@@ -33,6 +34,9 @@ public class MainActivity extends Activity {
 		{	
 			//TextView 생성
 			TextView noSchedule = new TextView(this);
+			noSchedule.setTextSize(14);
+			noSchedule.setTextColor(Color.BLACK);
+			noSchedule.setGravity(Gravity.CENTER_HORIZONTAL);
 			noSchedule.setText("일정이 없습니다. 지금 일정을 추가해 보세요!");
 			
 			container.addView(noSchedule);
@@ -47,6 +51,9 @@ public class MainActivity extends Activity {
 				int isFavorited = scheduleLists.getInt(5);	//0 : Off, 1 : On
 				
 				TextView Schedules = new TextView(this);
+				Schedules.setTextSize(16);
+				Schedules.setTextColor(Color.BLACK);
+				Schedules.setGravity(Gravity.CENTER_HORIZONTAL);
 				//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
 				Schedules.setText("제목 : "+Subject+"\n시작일 : "+StartDate+"\n종료일 : "+EndDate);
 			}
