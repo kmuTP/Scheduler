@@ -107,16 +107,16 @@
             android:paddingLeft="20px" />
 
         <TextView
-	        android:id="@+id/plan_view_end"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:paddingLeft="20px"
-	        android:paddingRight="20px"
-	        android:paddingTop="15px"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/plan_view_start"
-	        android:text="종료"
-	        android:textSize="20dp" />
+           android:id="@+id/plan_view_end"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:paddingLeft="20px"
+           android:paddingRight="20px"
+           android:paddingTop="15px"
+           android:layout_alignParentLeft="true"
+           android:layout_below="@+id/plan_view_start"
+           android:text="종료"
+           android:textSize="20dp" />
         
         
          <EditText
@@ -147,17 +147,17 @@
         
         
         <TextView
-	        android:id="@+id/plan_view_content"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="17dp"
-	        android:paddingLeft="20px"
-	        android:paddingRight="20px"
-	        android:paddingTop="15px"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/plan_view_end"
-	        android:text="메모"
-	        android:textSize="20dp" />
+           android:id="@+id/plan_view_content"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="17dp"
+           android:paddingLeft="20px"
+           android:paddingRight="20px"
+           android:paddingTop="15px"
+           android:layout_alignParentLeft="true"
+           android:layout_below="@+id/plan_view_end"
+           android:text="메모"
+           android:textSize="20dp" />
         
           <EditText
             android:id="@+id/plan_text_content"
@@ -182,7 +182,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" >
           
- 		<TextView
+       <TextView
             android:id="@+id/plan_view_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,17 +193,20 @@
             android:text="중요도"
             android:textSize="20dp" />
 
- 		<RatingBar
- 		    android:id="@+id/plan_select_rating"
- 		    android:layout_width="wrap_content"
- 		    android:layout_height="wrap_content"
- 		    android:layout_alignParentRight="true"
- 		    android:layout_alignParentTop="true"
- 		    android:duplicateParentState="true"
- 		    style="?android:attr/ratingBarStyleIndicator"
- 		    android:minHeight="48dp" />
-	           
-     	</RelativeLayout>
+       <RatingBar
+           android:id="@+id/plan_select_rating"
+           style="?android:attr/ratingBarStyleIndicator"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentTop="true"
+           android:layout_marginRight="85dp"
+           android:duplicateParentState="true"
+           android:rating="0" 
+           android:minHeight="48dp"
+           android:numStars="1" />
+              
+        </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/relativeLayout5"
