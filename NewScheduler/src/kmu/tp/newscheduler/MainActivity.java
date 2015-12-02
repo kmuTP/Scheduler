@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.*;
 import android.widget.Button;
+import android.widget.FrameLayout.LayoutParams;
 import android.view.*;
 import android.app.Activity;
 import android.app.*;
@@ -24,17 +25,29 @@ public class MainActivity extends Activity {
 		SQLiteDatabase db = dbManager.getReadableDatabase();
 		//스케줄 목록 호출
 		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
+		RelativeLayout container = (RelativeLayout) findViewById(R.id.scheduleListView);
 		
 		//목록이 있는지 확인한다.
 		if(scheduleLists.getCount() == 0) 
-		{
+		{	
+			//TextView 생성
+			TextView noSchedule = new TextView(this);
+			noSchedule.setText("일정이 없습니다. 지금 일정을 추가해 보세요!");
 			
+			container.addView(noSchedule);
 		}
 		else
 		{
-			while(scheduleLists.moveToNext())
+			for(boolean Lists = scheduleLists.moveToFirst(); Lists; Lists=scheduleLists.moveToNext())
 			{
+				String Subject = scheduleLists.getString(1);
+				String StartDate = scheduleLists.getString(2);
+				String EndDate = scheduleLists.getString(3);
+				int isFavorited = scheduleLists.getInt(5);	//0 : Off, 1 : On
 				
+				TextView Schedules = new TextView(this);
+				//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
+				Schedules.setText("제목 : "+Subject+"\n시작일 : "+StartDate+"\n종료일 : "+EndDate);
 			}
 		}
 		
