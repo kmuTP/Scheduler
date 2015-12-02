@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.widget.*;
-import android.widget.Button;
 import android.widget.FrameLayout.LayoutParams;
 import android.view.*;
 import android.app.Activity;
@@ -23,15 +22,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
-
-		
 		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
 		SQLiteDatabase db = dbManager.getReadableDatabase();
 		//스케줄 목록 호출
 		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
-		RelativeLayout container = (RelativeLayout) findViewById(R.id.scheduleListView);
+		ListView container = (ListView) findViewById(R.id.plan_list);
 		
 		//목록이 있는지 확인한다.
 		if(scheduleLists.getCount() == 0) 
@@ -64,7 +59,7 @@ public class MainActivity extends Activity {
 		}
 		
 		
-		Button addMenuBtn = (Button) findViewById(R.id.addSchedule);
+		Button addMenuBtn = (Button) findViewById(R.id.plus_btn);
 		addMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
@@ -72,7 +67,7 @@ public class MainActivity extends Activity {
 				MainActivity.this.startActivity(intent);
 			}
 		});
-		Button delMenuBtn = (Button) findViewById(R.id.delSchedule);
+		Button delMenuBtn = (Button) findViewById(R.id.delete_btn);
 		delMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
