@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/addSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -24,11 +24,11 @@
             android:text="일정추가" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/delSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/button1"
+            android:layout_toRightOf="@+id/addSchedule"
             android:text="일정삭제" />
 
     </RelativeLayout>

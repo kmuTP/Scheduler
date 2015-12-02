@@ -1,6 +1,8 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.*;
 import android.widget.Button;
 import android.view.*;
@@ -18,16 +20,39 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
+		SQLiteDatabase db = dbManager.getReadableDatabase();
+		//스케줄 목록 호출
+		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
 		
-		Button addMenuBtn = (Button) findViewById(R.id.button1);
+		//목록이 있는지 확인한다.
+		if(scheduleLists.getCount() == 0) 
+		{
+			
+		}
+		else
+		{
+			while(scheduleLists.moveToNext())
+			{
+				
+			}
+		}
 		
+		
+		Button addMenuBtn = (Button) findViewById(R.id.addSchedule);
 		addMenuBtn.setOnClickListener(new OnClickListener(){
 			public void onClick(View v)
 			{
-				Toast.makeText(getApplicationContext(), "김지현 바보", Toast.LENGTH_LONG).show();
+				//일정 추가 View Load
 			}
 		});
-		
+		Button delMenuBtn = (Button) findViewById(R.id.delSchedule);
+		addMenuBtn.setOnClickListener(new OnClickListener(){
+			public void onClick(View v)
+			{
+				//일정 삭제 View Load
+			}
+		});
 	}
 	
 	
