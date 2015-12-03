@@ -17,7 +17,10 @@ import android.view.MenuItem;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity {
-
+	
+	private int[] colorList = {0xffffaaaa,0xffaaffaa,0xffaaaaff,0xffF5CC73};
+	private int colorsize = colorList.length;
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,10 +28,11 @@ public class MainActivity extends Activity {
 		
 		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
 		SQLiteDatabase db = dbManager.getReadableDatabase();
+		
+		//db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values('방학!!','2015-12-21','2016-03-01','신나게놀기','0');");
 		//스케줄 목록 호출
 		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
 		RelativeLayout container = (RelativeLayout) findViewById(R.id.scheduleListView);
-		
 		//목록이 있는지 확인한다.
 		if(scheduleLists.getCount() == 0) 
 		{	
@@ -43,19 +47,30 @@ public class MainActivity extends Activity {
 		}
 		else
 		{
-			for(boolean Lists = scheduleLists.moveToFirst(); Lists; Lists=scheduleLists.moveToNext())
+			
+			int i=0;
+			if(scheduleLists.moveToFirst())
 			{
-				String Subject = scheduleLists.getString(1);
-				String StartDate = scheduleLists.getString(2);
-				String EndDate = scheduleLists.getString(3);
-				int isFavorited = scheduleLists.getInt(5);	//0 : Off, 1 : On
-				
-				TextView Schedules = new TextView(this);
-				Schedules.setTextSize(16);
-				Schedules.setTextColor(Color.BLACK);
-				Schedules.setGravity(Gravity.CENTER_HORIZONTAL);
-				//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
-				Schedules.setText("제목 : "+Subject+"\n시작일 : "+StartDate+"\n종료일 : "+EndDate);
+				while(scheduleLists.moveToNext())
+				{
+					int no = scheduleLists.getInt(0);
+					String Subject = scheduleLists.getString(1);
+					String StartDate = scheduleLists.getString(2);
+					String EndDate = scheduleLists.getString(3);
+					int isFavorited = scheduleLists.getInt(5);	//0 : Off, 1 : On
+					Toast.makeText(getApplicationContext(), no+" "+Subject+" "+StartDate, Toast.LENGTH_LONG).show();
+					TextView Schedules = new TextView(this);
+					Schedules.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,350));
+					Schedules.setTextSize(16);
+					Schedules.setTextColor(Color.BLACK);
+					Schedules.setPadding(0, 50, 0, 50);
+					Schedules.setBackgroundColor(colorList[i%colorsize]);
+					Schedules.setGravity(Gravity.CENTER_HORIZONTAL);
+					//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
+					Schedules.setText("제목 : "+Subject+"\n시작일 : "+StartDate+"\n종료일 : "+EndDate);
+					
+					container.addView(Schedules);
+				}
 			}
 		}
 		
