@@ -2,6 +2,7 @@ package kmu.tp.newscheduler;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -49,7 +50,9 @@ public class AddSchedule extends Activity {
 					// TODO Auto-generated method stub
 					 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 					 calendar.set(Calendar.MINUTE, minute);
-					 setLabel();       
+					 sTime += "일 "+hourOfDay+":"+minute+":"+calendar.getTime().getSeconds();
+					 txtLabel = (TextView) findViewById(R.id.txtTime);
+					 txtLabel.setText(sTime);
 				}
 			};
 	@Override
@@ -65,47 +68,36 @@ public class AddSchedule extends Activity {
 			public void onClick(View v) {
 				
 				// TODO Auto-generated method stub
-				DatePickerDialog dialog = new DatePickerDialog(AddSchedule.this,
+				final DatePickerDialog dateDialog = new DatePickerDialog(AddSchedule.this,
 									dateSetListener,
 									calendar.get(Calendar.YEAR),
 									calendar.get(Calendar.MONTH),
 									calendar.get(Calendar.DAY_OF_MONTH));
-				setLabel();
+			
 				
-				dialog.setButton(DialogInterface.BUTTON_POSITIVE, "다음", new DialogInterface.OnClickListener() {
+				dateDialog.setButton(DialogInterface.BUTTON_POSITIVE, "다음", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						if(which == DialogInterface.BUTTON_POSITIVE)
 						{
-							txtLabel = (TextView)findViewById(R.id.txtTime);
-							
+							DatePicker temp = dateDialog.getDatePicker();
+							sTime = String.valueOf(temp.getYear())+"년 "+
+									String.valueOf(temp.getMonth())+"월 "+
+									String.valueOf(temp.getDayOfMonth());
 							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
 									timeSetListener,
 									calendar.get(Calendar.HOUR_OF_DAY),
 									calendar.get(Calendar.MINUTE),
 									true);
-							setLabel();
 							
-							tdialog.setButton(DialogInterface.BUTTON_POSITIVE, "완료",new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									if(which == DialogInterface.BUTTON_POSITIVE)
-									{
-										txtLabel = (TextView)findViewById(R.id.txtTime);
-										txtLabel.setText(sTime);
-									}
-								}
-							});
 							tdialog.show();
 						}
 							
 					}
 				});
-				dialog.show();
+				dateDialog.show();
 				
 				
 				

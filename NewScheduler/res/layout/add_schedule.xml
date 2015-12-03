@@ -81,7 +81,6 @@
             android:text="시작"
             android:textSize="20dp" />
         
-        
         <Button
             android:id="@+id/plan_btn_startDate"
             android:layout_width="wrap_content"
@@ -89,28 +88,18 @@
             android:layout_above="@+id/plan_view_end"
             android:layout_alignBaseline="@+id/plan_view_start"
             android:layout_alignBottom="@+id/plan_view_start"
-            android:layout_toRightOf="@+id/plan_view_start"
             android:layout_marginLeft="10dp"
-            android:text="날짜"
-            android:paddingLeft="20px" />
-        <Button
-            android:id="@+id/plan_btn_startTime"
-            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/plan_view_start"
+            android:paddingLeft="20px"
+            android:text="설정" />
+        
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_btn_startDate"
             android:layout_alignBottom="@+id/plan_btn_startDate"
             android:layout_toRightOf="@+id/plan_btn_startDate"
-            android:layout_marginLeft="10dp"
-            android:text="시간"
-            android:paddingLeft="20px" />
-        
-        <TextView
-	        android:id="@+id/txtTime"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBaseline="@+id/plan_btn_startTime"
-            android:layout_alignBottom="@+id/plan_btn_startTime"
-            android:layout_toRightOf="@+id/plan_btn_startTime"
             android:hint="" />
 
         <TextView
