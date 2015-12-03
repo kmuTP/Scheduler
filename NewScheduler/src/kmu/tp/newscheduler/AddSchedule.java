@@ -66,26 +66,28 @@ public class AddSchedule extends Activity {
 									calendar.get(Calendar.YEAR),
 									calendar.get(Calendar.MONTH),
 									calendar.get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
-		
-		Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
-		
-		btn_startTime.setOnClickListener(new Button.OnClickListener(){
+				
+				Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
+				
+				btn_startTime.setOnClickListener(new Button.OnClickListener(){
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				new TimePickerDialog(AddSchedule.this,
-									timeSetListener,
-									calendar.get(Calendar.HOUR_OF_DAY),
-									calendar.get(Calendar.MINUTE),
-									true).show();
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						new TimePickerDialog(AddSchedule.this,
+											timeSetListener,
+											calendar.get(Calendar.HOUR_OF_DAY),
+											calendar.get(Calendar.MINUTE),
+											true).show();
+					}
+				});
+				
+				txtLabel = (TextView)findViewById(R.id.txtTime);
+				setLabel();
 			}
 		});
 		
-		txtLabel = (TextView)findViewById(R.id.txtTime);
-		setLabel();
+		
 
 		
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
