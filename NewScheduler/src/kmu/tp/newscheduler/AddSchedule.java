@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -27,6 +28,8 @@ public class AddSchedule extends Activity {
 
 	Calendar calendar = Calendar.getInstance();
 	TextView txtLabel;
+	String sTime="";
+	String eTime="";
 	
 	DatePickerDialog.OnDateSetListener dateSetListener=
 			new DatePickerDialog.OnDateSetListener() {
@@ -60,14 +63,53 @@ public class AddSchedule extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				
 				// TODO Auto-generated method stub
-				new DatePickerDialog(AddSchedule.this,
+				DatePickerDialog dialog = new DatePickerDialog(AddSchedule.this,
 									dateSetListener,
 									calendar.get(Calendar.YEAR),
 									calendar.get(Calendar.MONTH),
-									calendar.get(Calendar.DAY_OF_MONTH)).show();
+									calendar.get(Calendar.DAY_OF_MONTH));
+				setLabel();
 				
-				Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
+				dialog.setButton(DialogInterface.BUTTON_POSITIVE, "다음", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						if(which == DialogInterface.BUTTON_POSITIVE)
+						{
+							txtLabel = (TextView)findViewById(R.id.txtTime);
+							
+							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
+									timeSetListener,
+									calendar.get(Calendar.HOUR_OF_DAY),
+									calendar.get(Calendar.MINUTE),
+									true);
+							setLabel();
+							
+							tdialog.setButton(DialogInterface.BUTTON_POSITIVE, "완료",new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// TODO Auto-generated method stub
+									if(which == DialogInterface.BUTTON_POSITIVE)
+									{
+										txtLabel = (TextView)findViewById(R.id.txtTime);
+										txtLabel.setText(sTime);
+									}
+								}
+							});
+							tdialog.show();
+						}
+							
+					}
+				});
+				dialog.show();
+				
+				
+				
+			/*	Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
 				
 				btn_startTime.setOnClickListener(new Button.OnClickListener(){
 
@@ -80,10 +122,9 @@ public class AddSchedule extends Activity {
 											calendar.get(Calendar.MINUTE),
 											true).show();
 					}
-				});
+				});*/
 				
-				txtLabel = (TextView)findViewById(R.id.txtTime);
-				setLabel();
+				
 			}
 		});
 		
@@ -116,7 +157,7 @@ public class AddSchedule extends Activity {
 
 	protected void setLabel() {
 		// TODO Auto-generated method stub
-		  txtLabel.setText(DateFormat.getDateTimeInstance().format(calendar.getTime()));
+		 sTime = DateFormat.getDateTimeInstance().format(calendar.getTime());
 		
 	}
 
