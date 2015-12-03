@@ -80,7 +80,7 @@
             android:paddingTop="15px"
             android:text="시작"
             android:textSize="20dp" />
-        
+
         <Button
             android:id="@+id/plan_btn_startDate"
             android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
             android:layout_toRightOf="@+id/plan_view_start"
             android:paddingLeft="20px"
             android:text="설정" />
-        
+
         <TextView
             android:id="@+id/txtTime"
             android:layout_width="fill_parent"
@@ -103,76 +103,65 @@
             android:hint="" />
 
         <TextView
-           android:id="@+id/plan_view_end"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:paddingLeft="20px"
-           android:paddingRight="20px"
-           android:paddingTop="15px"
-           android:layout_alignParentLeft="true"
-           android:layout_below="@+id/plan_view_start"
-           android:layout_marginTop="17dp"
-           android:text="종료"
-           android:textSize="20dp" />
-        
-        
-         <Button
+            android:id="@+id/plan_view_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/plan_view_start"
+            android:layout_marginTop="17dp"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="종료"
+            android:textSize="20dp" />
+
+        <Button
             android:id="@+id/plan_btn_endDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/plan_view_end"
             android:layout_alignBaseline="@+id/plan_view_end"
             android:layout_alignBottom="@+id/plan_view_end"
-            android:layout_toRightOf="@+id/plan_view_end"
             android:layout_marginLeft="10dp"
-            android:text="날짜"
-            android:paddingLeft="20px" />
-        <Button
-            android:id="@+id/plan_btn_endTime"
-            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/plan_view_end"
+            android:paddingLeft="20px"
+            android:text="설정" />
+
+        <TextView
+            android:id="@+id/txtTime2"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_btn_endDate"
             android:layout_alignBottom="@+id/plan_btn_endDate"
             android:layout_toRightOf="@+id/plan_btn_endDate"
-            android:layout_marginLeft="10dp"
-            android:text="시간"
-            android:paddingLeft="20px" />
-        
-        <TextView
-	        android:id="@+id/txtTime2"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBaseline="@+id/plan_btn_endTime"
-            android:layout_alignBottom="@+id/plan_btn_endTime"
-            android:layout_toRightOf="@+id/plan_btn_endTime"
             android:hint="" />
+
         <TextView
-           android:id="@+id/plan_view_content"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="17dp"
-           android:paddingLeft="20px"
-           android:paddingRight="20px"
-           android:paddingTop="15px"
-           android:layout_alignParentLeft="true"
-           android:layout_below="@+id/plan_view_end"
-           android:text="메모"
-           android:textSize="20dp" />
-        
-          <EditText
-              android:id="@+id/plan_text_content"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@+id/plan_view_content"
-              android:ems="10"
-              android:hint="메모할 내용을  입력하시오"
-              android:inputType="textMultiLine"
-              android:minLines="3"
-              android:paddingLeft="20px" >
+            android:id="@+id/plan_view_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/plan_view_end"
+            android:layout_marginTop="17dp"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="메모"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/plan_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/plan_view_content"
+            android:ems="10"
+            android:hint="메모할 내용을  입력하시오"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:paddingLeft="20px" >
 
             <requestFocus />
         </EditText>
-
     </RelativeLayout>
 
        <RelativeLayout

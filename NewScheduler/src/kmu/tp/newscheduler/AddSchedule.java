@@ -31,6 +31,7 @@ public class AddSchedule extends Activity {
 	TextView txtLabel;
 	String sTime="";
 	String eTime="";
+	boolean isSTime = true;
 	
 	DatePickerDialog.OnDateSetListener dateSetListener=
 			new DatePickerDialog.OnDateSetListener() {
@@ -50,9 +51,17 @@ public class AddSchedule extends Activity {
 					// TODO Auto-generated method stub
 					 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 					 calendar.set(Calendar.MINUTE, minute);
-					 sTime += "일 "+hourOfDay+":"+minute+":"+calendar.getTime().getSeconds();
-					 txtLabel = (TextView) findViewById(R.id.txtTime);
-					 txtLabel.setText(sTime);
+					 if(isSTime==true)
+					 {
+						 sTime += String.format("일 %02d:%02d",hourOfDay,minute);
+						 txtLabel = (TextView) findViewById(R.id.txtTime);
+					 }
+					 else
+					 {
+						 eTime += String.format("일 %02d:%02d",hourOfDay,minute);
+						 txtLabel = (TextView) findViewById(R.id.txtTime2);
+					 }
+					 txtLabel.setText(isSTime==true?sTime:eTime);
 				}
 			};
 	@Override
@@ -66,7 +75,7 @@ public class AddSchedule extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				
+				isSTime = true;
 				// TODO Auto-generated method stub
 				final DatePickerDialog dateDialog = new DatePickerDialog(AddSchedule.this,
 									dateSetListener,
@@ -98,28 +107,48 @@ public class AddSchedule extends Activity {
 					}
 				});
 				dateDialog.show();
-				
-				
-				
-			/*	Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
-				
-				btn_startTime.setOnClickListener(new Button.OnClickListener(){
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						new TimePickerDialog(AddSchedule.this,
-											timeSetListener,
-											calendar.get(Calendar.HOUR_OF_DAY),
-											calendar.get(Calendar.MINUTE),
-											true).show();
-					}
-				});*/
-				
-				
 			}
 		});
+		Button btn_endDate = (Button)findViewById(R.id.plan_btn_endDate);
 		
+		btn_endDate.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isSTime = false;
+				// TODO Auto-generated method stub
+				final DatePickerDialog dateDialog = new DatePickerDialog(AddSchedule.this,
+									dateSetListener,
+									calendar.get(Calendar.YEAR),
+									calendar.get(Calendar.MONTH),
+									calendar.get(Calendar.DAY_OF_MONTH));
+			
+				
+				dateDialog.setButton(DialogInterface.BUTTON_POSITIVE, "다음", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						if(which == DialogInterface.BUTTON_POSITIVE)
+						{
+							DatePicker temp = dateDialog.getDatePicker();
+							eTime = String.valueOf(temp.getYear())+"년 "+
+									String.valueOf(temp.getMonth())+"월 "+
+									String.valueOf(temp.getDayOfMonth());
+							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
+									timeSetListener,
+									calendar.get(Calendar.HOUR_OF_DAY),
+									calendar.get(Calendar.MINUTE),
+									true);
+							
+							tdialog.show();
+						}
+							
+					}
+				});
+				dateDialog.show();
+			}
+		});
 		
 
 		
