@@ -1,6 +1,11 @@
 package kmu.tp.newscheduler;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -10,16 +15,78 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RatingBar;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 public class AddSchedule extends Activity {
 
+	Calendar calendar = Calendar.getInstance();
+	TextView txtLabel;
+	
+	DatePickerDialog.OnDateSetListener dateSetListener=
+			new DatePickerDialog.OnDateSetListener() {
+				
+				@Override
+				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+					// TODO Auto-generated method stub
+					calendar.set(year,monthOfYear,dayOfMonth);
+					setLabel();
+				}
+			};
+	TimePickerDialog.OnTimeSetListener timeSetListener =
+			new TimePickerDialog.OnTimeSetListener() {
+				
+				@Override
+				public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+					// TODO Auto-generated method stub
+					 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+					 calendar.set(Calendar.MINUTE, minute);
+					 setLabel();       
+				}
+			};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_schedule);
+		
+		Button btn_startDate = (Button)findViewById(R.id.plan_btn_startDate);
+		
+		btn_startDate.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new DatePickerDialog(AddSchedule.this,
+									dateSetListener,
+									calendar.get(Calendar.YEAR),
+									calendar.get(Calendar.MONTH),
+									calendar.get(Calendar.DAY_OF_MONTH)).show();
+			}
+		});
+		
+		Button btn_startTime = (Button)findViewById(R.id.plan_btn_startTime);
+		
+		btn_startTime.setOnClickListener(new Button.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new TimePickerDialog(AddSchedule.this,
+									timeSetListener,
+									calendar.get(Calendar.HOUR_OF_DAY),
+									calendar.get(Calendar.MINUTE),
+									true).show();
+			}
+		});
+		
+		txtLabel = (TextView)findViewById(R.id.txtTime);
+		setLabel();
+
 		
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
@@ -43,6 +110,12 @@ public class AddSchedule extends Activity {
 				return true;
 			}
 		});
+	}
+
+	protected void setLabel() {
+		// TODO Auto-generated method stub
+		  txtLabel.setText(DateFormat.getDateTimeInstance().format(calendar.getTime()));
+		
 	}
 
 	@Override
