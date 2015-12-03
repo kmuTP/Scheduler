@@ -16,16 +16,6 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="30dp" >
 
-        <ImageButton
-            android:id="@+id/todo_btn_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="53dp"
-            android:background="@drawable/ic_delete"
-            android:text="this text is invisible" />
-
          <ImageButton
              android:id="@+id/todo_btn_modification"
              android:layout_width="wrap_content"
@@ -34,6 +24,16 @@
              android:layout_alignParentTop="true"
              android:layout_marginLeft="68dp"
              android:background="@drawable/ic_modify"
+             android:text="this text is invisible" />
+
+         <ImageButton
+             android:id="@+id/todo_btn_delete"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentTop="true"
+             android:layout_marginLeft="77dp"
+             android:layout_toRightOf="@+id/todo_btn_modification"
+             android:background="@drawable/ic_delete"
              android:text="this text is invisible" />
 
     </RelativeLayout>
@@ -130,14 +130,19 @@
             android:text="제목"
             android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/todo_btn_setPriority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/todo_view_subject"
-            android:layout_alignBottom="@+id/todo_view_subject"
-            android:layout_alignParentRight="true"
-            android:text="중요설정" />
+         <RatingBar
+             android:id="@+id/todo_btn_setPriority"
+             style="?android:attr/ratingBarStyleIndicator"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginRight="17dp"
+             android:duplicateParentState="true"
+             android:minHeight="48dp"
+             android:numStars="1"
+             android:rating="0" />
+        
     </RelativeLayout>
 
     <RelativeLayout
@@ -165,8 +170,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
             android:background="@drawable/ic_cancel"
             android:text="this text is invisible" />
+
     </RelativeLayout>
 
     <View
