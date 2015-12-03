@@ -59,6 +59,7 @@
 
             <requestFocus />
         </EditText>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -172,6 +173,14 @@
 
             <requestFocus />
         </EditText>
+
+          <TimePicker
+              android:id="@+id/timePicker1"
+              android:layout_width="100dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_below="@+id/plan_text_content"
+              android:layout_toRightOf="@+id/plan_btn_endDate" />
 
     </RelativeLayout>
 

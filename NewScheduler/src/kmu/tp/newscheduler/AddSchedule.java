@@ -1,9 +1,18 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.RatingBar;
+import android.widget.Toast;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class AddSchedule extends Activity {
 
@@ -11,6 +20,29 @@ public class AddSchedule extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_schedule);
+		
+		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
+		ratings.setStepSize((float) 1.0);
+		ratings.setRating((float)0.0);
+		LayerDrawable stars = (LayerDrawable) ratings.getProgressDrawable();
+		stars.getDrawable(2).setColorFilter(Color.YELLOW,PorterDuff.Mode.SRC_ATOP);
+		ratings.setIsIndicator(false);
+		ratings.setOnTouchListener(new OnTouchListener(){
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				
+				if(event.getAction()==MotionEvent.ACTION_UP)
+				{
+					// TODO Auto-generated method stub
+					if(ratings.getRating()==(float)0.0)
+						ratings.setRating((float)1.0);
+					else
+						ratings.setRating((float)0.0);
+				}
+				return true;
+			}
+		});
 	}
 
 	@Override
