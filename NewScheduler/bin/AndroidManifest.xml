@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_cancel"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" android:name="GlobalVariable">
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar" android:name="GlobalVariable">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
