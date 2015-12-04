@@ -1,6 +1,8 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -11,14 +13,39 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class DetailSchedule extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_schedule);
 		final RatingBar ratings = (RatingBar) findViewById(R.id.todo_btn_setPriority);
+		
+		/*DB 읽어오기*/
+		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
+		SQLiteDatabase db = dbManager.getReadableDatabase();
+		GlobalVariable gb = (GlobalVariable)getApplicationContext();
+	
+		Cursor detail = db.rawQuery("select * from schedule where no = "+gb.detailNum,null);
+		/*DB 처리하기*/
+		if(detail.moveToFirst())
+		{
+			final int no = detail.getInt(0);
+			String Subject = detail.getString(1);
+			String StartDate = detail.getString(2);
+			String EndDate = detail.getString(3);
+			String Contents = detail.getString(4);
+			int isFavorited = detail.getInt(5);	//0 : Off, 1 : On
+			
+			TextView vSubject = (TextView)findViewById(R.id.todo_view_subject);
+			vSubject.setText(Subject);
+			
+		}
+		
+		
 		ratings.setStepSize((float) 1.0);
 		ratings.setRating((float)0.0);
 		LayerDrawable stars = (LayerDrawable) ratings.getProgressDrawable();

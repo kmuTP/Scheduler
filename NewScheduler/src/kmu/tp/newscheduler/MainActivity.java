@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
 		SQLiteDatabase db = dbManager.getReadableDatabase();
 		
-		db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values('세희바보','2015-12-21','2016-03-01','신나게놀기','0');");
+		//db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values('방학!!','2015-12-21','2016-03-01','신나게놀기','0');");
 		//스케줄 목록 호출
 		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc",null);
 		RelativeLayout container = (RelativeLayout) findViewById(R.id.scheduleListView);
