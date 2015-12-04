@@ -11,29 +11,29 @@
     <RelativeLayout
         android:id="@+id/relativeLayout5"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="30dp" >
 
          <ImageButton
-             android:id="@+id/todo_btn_modification"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:layout_alignParentTop="true"
-             android:layout_marginLeft="68dp"
-             android:background="@drawable/ic_modify"
-             android:text="this text is invisible" />
-
-         <ImageButton
              android:id="@+id/todo_btn_delete"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="70dp"
+             android:layout_height="70dp"
              android:layout_alignParentTop="true"
              android:layout_marginLeft="77dp"
              android:layout_toRightOf="@+id/todo_btn_modification"
              android:background="@drawable/ic_delete"
+             android:text="this text is invisible" />
+
+         <ImageButton
+             android:id="@+id/todo_btn_modification"
+             android:layout_width="70dp"
+             android:layout_height="70dp"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginLeft="50dp"
+             android:background="@drawable/ic_modify"
              android:text="this text is invisible" />
 
     </RelativeLayout>
@@ -159,7 +159,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp" >
@@ -178,8 +178,8 @@
 
         <ImageButton
             android:id="@+id/todo_btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
@@ -199,11 +199,10 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="1px"
+        android:layout_height="80dp"
         android:layout_above="@+id/relativeLayout5"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="26dp"
-        android:background="#FFD8D8"
         android:visibility="visible" />
 
     
