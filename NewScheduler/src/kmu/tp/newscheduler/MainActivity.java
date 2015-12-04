@@ -37,7 +37,6 @@ public class MainActivity extends Activity {
 		//목록이 있는지 확인한다.
 		if(scheduleLists.getCount() == 0) 
 		{	
-			db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values('세희바보!!','2015-12-21','2016-03-01','신나게놀기','0');");
 			//TextView 생성
 			TextView noSchedule = new TextView(this);
 			noSchedule.setTextSize(14);
