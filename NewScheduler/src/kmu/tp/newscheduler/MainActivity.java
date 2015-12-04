@@ -58,14 +58,26 @@ public class MainActivity extends Activity {
 					String StartDate = scheduleLists.getString(2);
 					String EndDate = scheduleLists.getString(3);
 					int isFavorited = scheduleLists.getInt(5);	//0 : Off, 1 : On
-					Toast.makeText(getApplicationContext(), no+" "+Subject+" "+StartDate, Toast.LENGTH_LONG).show();
 					TextView Schedules = new TextView(this);
-					Schedules.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,350));
 					Schedules.setTextSize(16);
+					Schedules.setId(i++);
 					Schedules.setTextColor(Color.BLACK);
 					Schedules.setPadding(0, 50, 0, 50);
 					Schedules.setBackgroundColor(colorList[i%colorsize]);
 					Schedules.setGravity(Gravity.CENTER_HORIZONTAL);
+					if(i>1)
+					{
+						RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,350);
+						params.addRule(RelativeLayout.BELOW, i-1);
+						params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+						Schedules.setLayoutParams(params);
+					}
+					else
+					{
+						RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,350);
+						params.addRule(RelativeLayout.ALIGN_BOTTOM);
+						Schedules.setLayoutParams(params);
+					}
 					//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
 					Schedules.setText("제목 : "+Subject+"\n시작일 : "+StartDate+"\n종료일 : "+EndDate);
 					
