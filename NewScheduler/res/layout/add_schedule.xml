@@ -46,15 +46,16 @@
 
         <EditText
             android:id="@+id/plan_text_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_view_name"
             android:layout_alignBottom="@+id/plan_view_name"
             android:layout_toRightOf="@+id/plan_view_name"
             android:layout_marginLeft="10dp"
             android:ems="10"
-            android:hint="제목을 입력하시오"
+            android:hint="제목을 입력하시오 (20자 제한)."
             android:inputType="text"
+            android:maxLength="20"
             android:paddingLeft="20px" >
 
             <requestFocus />
@@ -155,7 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/plan_view_content"
             android:ems="10"
-            android:hint="메모할 내용을  입력하시오"
+            android:hint="메모할 내용을  입력하시오."
             android:inputType="textMultiLine"
             android:minLines="3"
             android:paddingLeft="20px" >
