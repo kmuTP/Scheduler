@@ -23,10 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main_activity2" >
-        </activity>
-        <activity
             android:name=".AddSchedule"
             android:label="@string/title_activity_add_schedule" >
         </activity>
