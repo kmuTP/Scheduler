@@ -1,5 +1,7 @@
 package kmu.tp.newscheduler;
 
-public class GlobalVariable {
+import android.app.Application;
+
+public class GlobalVariable extends Application {
 	public int detailNum = 0;
 }

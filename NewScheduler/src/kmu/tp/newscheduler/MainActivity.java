@@ -12,9 +12,8 @@ import android.view.*;
 import android.app.Activity;
 import android.app.*;
 import android.os.*;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View.OnClickListener;
+import kmu.tp.newscheduler.GlobalVariable;
 
 import kmu.tp.newscheduler.GlobalVariable;
 
@@ -55,7 +54,7 @@ public class MainActivity extends Activity {
 			{
 				while(scheduleLists.moveToNext())
 				{
-					int no = scheduleLists.getInt(0);
+					final int no = scheduleLists.getInt(0);
 					String Subject = scheduleLists.getString(1);
 					String StartDate = scheduleLists.getString(2);
 					String EndDate = scheduleLists.getString(3);
@@ -84,6 +83,17 @@ public class MainActivity extends Activity {
 					Schedules.setText("力格 : "+Subject+"\n矫累老 : "+StartDate+"\n辆丰老 : "+EndDate);
 					
 					container.addView(Schedules);
+					
+					Schedules.setOnClickListener(new OnClickListener()
+					{
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									GlobalVariable gb = (GlobalVariable)getApplicationContext();
+									gb.detailNum = no;
+									Toast.makeText(getApplicationContext(), ""+gb.detailNum, Toast.LENGTH_LONG).show();
+								}
+					});
 				}
 			}
 		}
