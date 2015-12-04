@@ -8,7 +8,7 @@
     android:paddingTop="0dp"
     tools:context="kmu.tp.newscheduler.MainActivity" >
 
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/relativeLayout5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -41,7 +41,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/relativeLayout3" >
 
@@ -50,6 +50,18 @@
             android:layout_height="1px"
             android:background="#FFD8D8"
             android:visibility="visible" />
+        <TextView
+	        android:id="@+id/todo_icon_explanation"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_marginTop="15dp"
+	        android:paddingLeft="20px"
+	        android:paddingRight="20px"
+	        android:paddingTop="15px"
+	        android:text="세부사항"
+	        android:textSize="20dp"
+	        android:gravity="center" />
     </RelativeLayout>
 
     <View
@@ -71,12 +83,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
+            android:layout_centerVertical="true" 
             android:text="상태"
-            android:textSize="15dp" />
+            android:paddingLeft="17dp"
+            android:textSize="20dp"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/textView1"
@@ -85,7 +96,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="52dp"
             android:layout_toRightOf="@+id/todo_icon_state"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20dp"
+            android:gravity="center" />
 
     </RelativeLayout>
 
@@ -109,12 +122,12 @@
 
         <RatingBar
             android:id="@+id/todo_btn_setPriority"
-            style="?android:attr/ratingBarStyleIndicator"
+            style="?android:attr/ratingBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="23dp"
             android:duplicateParentState="true"
             android:minHeight="48dp"
             android:numStars="1"
@@ -126,9 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
+            android:gravity="center"
             android:text="제목"
             android:textSize="20dp" />
 
@@ -160,7 +171,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:text="TextView"
-            android:textSize="16dp" />
+            android:textSize="20dp" />
 
     </RelativeLayout>
 
@@ -171,18 +182,5 @@
         android:layout_below="@+id/relativeLayout6"
         android:layout_marginTop="52dp" >
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/todo_icon_explanation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/relativeLayout4"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:paddingTop="15px"
-        android:text="세부사항"
-        android:textSize="20dp" />
 
 </RelativeLayout>

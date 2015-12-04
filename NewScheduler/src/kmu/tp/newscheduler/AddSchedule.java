@@ -175,6 +175,26 @@ public class AddSchedule extends Activity {
                           }              
            }
         });
+        
+       /* Button btn_cancel = (Button)findViewById(R.id.plan_btn_cancel);
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+                        if (textedit.getText().toString().length() == 0 ) 
+                           Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        else 
+                        {
+                      	  if(TextUtils.isEmpty(sTime))
+                          	  Toast.makeText(getApplicationContext(), "시작 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
+                      	  else{
+                      		  if(TextUtils.isEmpty(eTime))
+                              	  Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
+                      		  else
+                      			  Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                      	  }	  
+                        }     
+        }
+         
+      });*/
      
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
