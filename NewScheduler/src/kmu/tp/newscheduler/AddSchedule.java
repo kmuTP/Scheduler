@@ -151,6 +151,9 @@ public class AddSchedule extends Activity {
 				dateDialog.show();
 			}
 		});
+		
+		
+		
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
 		ratings.setRating((float)0.0);
