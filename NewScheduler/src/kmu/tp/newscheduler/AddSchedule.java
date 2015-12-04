@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -151,26 +152,21 @@ public class AddSchedule extends Activity {
 			}
 		});
 		
-		Button btn_save = (Button)findViewById(R.id.plan_btn_save);
+	   final Button btn_save = (Button)findViewById(R.id.plan_btn_save);
+	   final EditText textedit = (EditText) findViewById(R.id.txtTime);
+	   
 		btn_save.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "저장합니다.", Toast.LENGTH_SHORT).show();
-				 final EditText textedit = (EditText) findViewById(R.id.textedit);
-
-				    button.setOnClickListener(new View.OnClickListener() {
-				        public void onClick(View v) {
-
-				            if (textedit.getText().toString() == "abc") 
-				                button.setText("pass ok"); // doesn't work
+				 
+				            if (textedit.getText().toString() != "") 
+				            	btn_save.setText("저장합니다."); // doesn't work
 				            else 
-				                button.setText("wrong pass");
+				            	btn_save.setText("제목을 채워주세요.");
 
-				        }
-				    });
-			}	
+			}
 		});
 		
 		
