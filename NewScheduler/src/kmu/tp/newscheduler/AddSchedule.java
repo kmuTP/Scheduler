@@ -151,25 +151,6 @@ public class AddSchedule extends Activity {
 				dateDialog.show();
 			}
 		});
-		
-	   final Button btn_save = (Button)findViewById(R.id.plan_btn_save);
-	   final EditText textedit = (EditText) findViewById(R.id.txtTime);
-	   
-		btn_save.setOnClickListener(new Button.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				 
-				            if (textedit.getText().toString() != "") 
-				            	btn_save.setText("저장합니다."); // doesn't work
-				            else 
-				            	btn_save.setText("제목을 채워주세요.");
-
-			}
-		});
-		
-		
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
 		ratings.setRating((float)0.0);
