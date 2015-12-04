@@ -8,5 +8,6 @@
     <string name="_2015_11_25_n_">2015.11.25\\n오픈소스 프로젝트 진행하기</string>
     <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="title_activity_add_schedule">AddSchedule</string>
+    <string name="title_activity_detail_schedule">DetailSchedule</string>
 
 </resources>

@@ -158,7 +158,18 @@ public class AddSchedule extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(getApplicationContext(), "저장합니다.", Toast.LENGTH_SHORT).show();
-				
+				 final EditText textedit = (EditText) findViewById(R.id.textedit);
+
+				    button.setOnClickListener(new View.OnClickListener() {
+				        public void onClick(View v) {
+
+				            if (textedit.getText().toString() == "abc") 
+				                button.setText("pass ok"); // doesn't work
+				            else 
+				                button.setText("wrong pass");
+
+				        }
+				    });
 			}	
 		});
 		

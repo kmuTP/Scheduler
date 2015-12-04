@@ -30,6 +30,10 @@
             android:name=".AddSchedule"
             android:label="@string/title_activity_add_schedule" >
         </activity>
+        <activity
+            android:name=".DetailSchedule"
+            android:label="@string/title_activity_detail_schedule" >
+        </activity>
     </application>
 
 </manifest>
