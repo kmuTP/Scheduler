@@ -17,16 +17,6 @@
         android:layout_marginBottom="30dp" >
 
         <ImageButton
-            android:id="@+id/todo_btn_modification"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="62dp"
-            android:background="@drawable/ic_modify"
-            android:text="this text is invisible" />
-
-        <ImageButton
             android:id="@+id/todo_btn_delete"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -34,6 +24,16 @@
             android:layout_marginLeft="56dp"
             android:layout_toRightOf="@+id/todo_btn_modification"
             android:background="@drawable/ic_delete"
+            android:text="this text is invisible" />
+
+        <ImageButton
+            android:id="@+id/todo_btn_modification"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="74dp"
+            android:background="@drawable/ic_modify"
             android:text="this text is invisible" />
 
     </RelativeLayout>
@@ -50,27 +50,7 @@
             android:layout_height="1px"
             android:background="#FFD8D8"
             android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/todo_icon_explanation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
-            android:text="세부사항"
-            android:textSize="20dp" />
     </RelativeLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1px"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_marginTop="15dp"
-        android:background="#FFD8D8"
-        android:visibility="visible" />
 
     <View
         android:layout_width="wrap_content"
@@ -81,9 +61,9 @@
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="75dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_marginTop="18dp" >
 
         <TextView
@@ -91,68 +71,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:paddingLeft="20px"
             android:paddingRight="20px"
             android:paddingTop="15px"
             android:text="상태"
             android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/todo_btn_finSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="완료" />
-
-        <Button
-            android:id="@+id/todo_btn_ingSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/todo_btn_finSchedule"
-            android:text="진행중" />
-
-        <Button
-            android:id="@+id/todo_btn_beforeSchedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/todo_btn_ingSchedule"
-            android:text="시작전" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_marginTop="31dp" >
-
         <TextView
-            android:id="@+id/todo_view_subject"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
-            android:text="제목"
-            android:textSize="20dp" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="52dp"
+            android:layout_toRightOf="@+id/todo_icon_state"
+            android:text="TextView" />
 
-        <RatingBar
-            android:id="@+id/todo_btn_setPriority"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="17dp"
-            android:duplicateParentState="true"
-            android:minHeight="48dp"
-            android:numStars="1"
-            android:rating="0" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -163,18 +97,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp" >
 
-        <TextView
-            android:id="@+id/todo_view_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
-            android:text="할일"
-            android:textSize="20dp" />
-
         <ImageButton
             android:id="@+id/todo_btn_back"
             android:layout_width="50dp"
@@ -184,6 +106,32 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/ic_cancel"
             android:text="this text is invisible" />
+
+        <RatingBar
+            android:id="@+id/todo_btn_setPriority"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:duplicateParentState="true"
+            android:minHeight="48dp"
+            android:numStars="1"
+            android:rating="0" />
+
+        <TextView
+            android:id="@+id/todo_view_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="제목"
+            android:textSize="20dp" />
+
     </RelativeLayout>
 
     <View
@@ -207,11 +155,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16dp" />
 
     </RelativeLayout>
 
@@ -222,5 +171,18 @@
         android:layout_below="@+id/relativeLayout6"
         android:layout_marginTop="52dp" >
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/todo_icon_explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/relativeLayout4"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:paddingTop="15px"
+        android:text="세부사항"
+        android:textSize="20dp" />
 
 </RelativeLayout>

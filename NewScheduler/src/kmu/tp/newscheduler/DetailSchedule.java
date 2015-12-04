@@ -43,6 +43,9 @@ public class DetailSchedule extends Activity {
 			TextView vSubject = (TextView)findViewById(R.id.todo_view_subject);
 			vSubject.setText(Subject);
 			
+			TextView vContent = (TextView)findViewById(R.id.todo_view_detail);
+			vContent.setText(Contents);
+			
 		}
 		
 		
