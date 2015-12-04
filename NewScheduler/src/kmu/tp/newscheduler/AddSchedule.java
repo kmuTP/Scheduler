@@ -152,8 +152,22 @@ public class AddSchedule extends Activity {
 			}
 		});
 		
-		
-		
+		Button btn_save = (Button)findViewById(R.id.plan_btn_save);
+        final EditText textedit = (EditText) findViewById(R.id.plan_text_name);
+        btn_save.setOnClickListener(new Button.OnClickListener() {
+
+           @Override
+           public void onClick(View v) {
+              // TODO Auto-generated method stub
+               
+                          if (textedit.getText().toString().length() == 0 ) 
+                             Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                          else 
+                             Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                         
+           }
+        });
+     
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
 		ratings.setRating((float)0.0);
