@@ -16,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnClickListener;
 
+import kmu.tp.newscheduler.GlobalVariable;
+
 public class MainActivity extends Activity {
 	
-	private int[] colorList = {0xffffaaaa,0xffaaffaa,0xffaaaaff,0xffF5CC73};
+	private int[] colorList = {0xffFF9F94,0xffFFD294,0xffFBFF94,0xffAFFF94,0xff94FFC8,0xff94E6FF,0xff9F94FF,0xffEA94FF};
 	private int colorsize = colorList.length;
 	@SuppressWarnings("deprecation")
 	@Override
@@ -68,14 +70,14 @@ public class MainActivity extends Activity {
 					if(i>1)
 					{
 						RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,350);
-						params.addRule(RelativeLayout.BELOW, i-1);
-						params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+						params.addRule(RelativeLayout.BELOW,i);
+						//params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,i-1);
 						Schedules.setLayoutParams(params);
 					}
 					else
 					{
 						RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,350);
-						params.addRule(RelativeLayout.ALIGN_BOTTOM);
+						params.addRule(RelativeLayout.ALIGN_START);
 						Schedules.setLayoutParams(params);
 					}
 					//시작일과 종료일, 그리고 제목만 간단하게 표시한다.
