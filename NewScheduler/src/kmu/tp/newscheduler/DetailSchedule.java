@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -83,7 +84,7 @@ public class DetailSchedule extends Activity {
 			
 		}
 		
-		Button modifyBtn = (Button) findViewById(R.id.todo_btn_modification);
+		ImageButton modifyBtn = (ImageButton) findViewById(R.id.todo_btn_modification);
 		modifyBtn.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)

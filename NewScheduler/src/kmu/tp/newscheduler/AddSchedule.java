@@ -185,6 +185,8 @@ public class AddSchedule extends Activity {
 								Date EDate = EFormat.parse(checkETime);	//종료날짜
 								Date CDate = new Date();				//현재날짜
 								
+								Toast.makeText(getApplicationContext(), ""+CDate.getTime(), Toast.LENGTH_SHORT).show();
+								
 								//1. 시작시간이 현재시간보다 더 이전일 수는 없다.
 								//2. 종료시간이 시작시간보다 빠를 수 없다.
 								if(SDate.getTime() - CDate.getTime() < 0)
