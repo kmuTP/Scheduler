@@ -18,12 +18,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailSchedule extends Activity {
+	
+	public String Subject,StartDate,EndDate,Contents;
+	public int no,isFavorited;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,6 @@ public class DetailSchedule extends Activity {
 		SQLiteDatabase db = dbManager.getReadableDatabase();
 		final GlobalVariable gb = (GlobalVariable)getApplicationContext();
 		
-		int no = 0;
-		String Subject=null, StartDate=null, EndDate=null, Contents=null;
-		int isFavorited = 0;
-		
 	
 		Cursor detail = db.rawQuery("select * from schedule where no = "+gb.detailNum,null);
 		/*DB 처리하기*/
@@ -52,6 +51,8 @@ public class DetailSchedule extends Activity {
 			EndDate = detail.getString(3);
 			Contents = detail.getString(4);
 			isFavorited = detail.getInt(5);	//0 : Off, 1 : On
+			
+			Toast.makeText(getApplicationContext(), Subject, Toast.LENGTH_LONG).show();
 			
 			TextView vSubject = (TextView)findViewById(R.id.todo_view_subject);
 			vSubject.setText(Subject);
