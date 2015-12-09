@@ -90,15 +90,15 @@
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/detail_text_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="52dp"
             android:layout_toRightOf="@+id/todo_icon_state"
+            android:gravity="center"
             android:text="TextView"
-            android:textSize="20dp"
-            android:gravity="center" />
+            android:textSize="20dp" />
 
     </RelativeLayout>
 

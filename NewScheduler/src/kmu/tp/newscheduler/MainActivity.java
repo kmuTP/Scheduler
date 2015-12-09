@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 								public void onClick(View v) {
 									// TODO Auto-generated method stub
 									GlobalVariable gb = (GlobalVariable)getApplicationContext();
-									gb.detailNum = no;
+									gb.modNum = gb.detailNum;
 									
 									Intent intent = new Intent(MainActivity.this, DetailSchedule.class);
 									MainActivity.this.startActivity(intent);
