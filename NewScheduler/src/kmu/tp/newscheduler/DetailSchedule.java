@@ -3,7 +3,7 @@ package kmu.tp.newscheduler;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +28,7 @@ public class DetailSchedule extends Activity {
 	public String Subject,StartDate,EndDate,Contents;
 	public int no,isFavorited;
 
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -52,8 +53,6 @@ public class DetailSchedule extends Activity {
 			Contents = detail.getString(4);
 			isFavorited = detail.getInt(5);	//0 : Off, 1 : On
 			
-			Toast.makeText(getApplicationContext(), Subject, Toast.LENGTH_LONG).show();
-			
 			TextView vSubject = (TextView)findViewById(R.id.todo_view_subject);
 			vSubject.setText(Subject);
 			
@@ -69,14 +68,17 @@ public class DetailSchedule extends Activity {
 				Date endTime = endDateFormat.parse(EndDate);
 				Date curTime = new Date();
 				
-				TextView vStatus = (TextView)findViewById(R.id.detail_text_status);
-				vStatus.setText(Subject);
+				
+				
+				TextView vStatus = (TextView)findViewById(R.id.todo_status_schedule);
 				
 				if(startTime.getTime() < curTime.getTime())
 					vStatus.setText("시작 전");
 				else if(startTime.getTime() < curTime.getTime() && curTime.getTime()<=endTime.getTime())
 					vStatus.setText("진행 중");
-				else vStatus.setTag("종료됨");
+				else vStatus.setText("종료됨");
+				
+				Toast.makeText(getApplicationContext(), vStatus.getText(), Toast.LENGTH_LONG).show();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
