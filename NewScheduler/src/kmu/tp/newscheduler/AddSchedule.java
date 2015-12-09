@@ -178,16 +178,13 @@ public class AddSchedule extends Activity {
                         	 Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
                           else
                           {
-                        	  SimpleDateFormat SFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        	  SimpleDateFormat EFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        	  SimpleDateFormat SFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                        	  SimpleDateFormat EFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                         	  try {
 								Date SDate = SFormat.parse(checkSTime);	//시작날짜
 								Date EDate = EFormat.parse(checkETime);	//종료날짜
 								Date CDate = new Date();				//현재날짜
 								
-								Toast.makeText(getApplicationContext(), "현재날짜"+CDate, Toast.LENGTH_SHORT).show();
-								Toast.makeText(getApplicationContext(), "시작날짜"+SDate, Toast.LENGTH_SHORT).show();
-					
 								//1. 시작시간이 현재시간보다 더 이전일 수는 없다.
 								//2. 종료시간이 시작시간보다 빠를 수 없다.
 								if(SDate.getTime() - CDate.getTime() < 0)
