@@ -106,7 +106,7 @@ public class AddSchedule extends Activity {
 						{
 							DatePicker temp = dateDialog.getDatePicker();
 							sTime = String.valueOf(temp.getYear())+"년 "+
-									String.valueOf(temp.getMonth())+"월 "+
+									String.valueOf(temp.getMonth()+1)+"월 "+
 									String.valueOf(temp.getDayOfMonth());
 							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
 									timeSetListener,
@@ -146,7 +146,7 @@ public class AddSchedule extends Activity {
 						{
 							DatePicker temp = dateDialog.getDatePicker();
 							eTime = String.valueOf(temp.getYear())+"년 "+
-									String.valueOf(temp.getMonth())+"월 "+
+									String.valueOf(temp.getMonth()+1)+"월 "+
 									String.valueOf(temp.getDayOfMonth());
 							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
 									timeSetListener,
