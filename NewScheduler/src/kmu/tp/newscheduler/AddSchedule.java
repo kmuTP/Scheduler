@@ -1,6 +1,8 @@
 package kmu.tp.newscheduler;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,11 +30,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class AddSchedule extends Activity {
-
+	
+	long nTime = System.currentTimeMillis();
 	Calendar calendar = Calendar.getInstance();
 	TextView txtLabel;
 	String sTime="";
 	String eTime="";
+	String checkSTime="",checkETime="";
 	boolean isSTime = true;
 	
 	DatePickerDialog.OnDateSetListener dateSetListener=
@@ -41,7 +45,7 @@ public class AddSchedule extends Activity {
 				@Override
 				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 					// TODO Auto-generated method stub
-					calendar.set(year,monthOfYear,dayOfMonth);
+					calendar.set(year,monthOfYear,dayOfMonth);					
 					setLabel();
 				}
 			};
@@ -57,11 +61,15 @@ public class AddSchedule extends Activity {
 					 if(isSTime==true)
 					 {
 						 sTime += String.format("일 %02d:%02d",hourOfDay,minute);
+						 checkSTime = String.format("%04d-%02d-%02d %02d:%02d",
+								 Calendar.YEAR,Calendar.MONTH,Calendar.DATE,Calendar.HOUR_OF_DAY,Calendar.MINUTE);
 						 txtLabel = (TextView) findViewById(R.id.txtTime);
 					 }
 					 else
 					 {
 						 eTime += String.format("일 %02d:%02d",hourOfDay,minute);
+						 checkETime = String.format("%04d-%02d-%02d %02d:%02d",
+								 Calendar.YEAR,Calendar.MONTH,Calendar.DATE,Calendar.HOUR_OF_DAY,Calendar.MINUTE);
 						 txtLabel = (TextView) findViewById(R.id.txtTime2);
 					 }
 					 txtLabel.setText(isSTime==true?sTime:eTime);
@@ -86,6 +94,8 @@ public class AddSchedule extends Activity {
 									calendar.get(Calendar.MONTH),
 									calendar.get(Calendar.DAY_OF_MONTH));
 			
+				
+				
 				
 				dateDialog.setButton(DialogInterface.BUTTON_POSITIVE, "다음", new DialogInterface.OnClickListener() {
 					
@@ -162,39 +172,36 @@ public class AddSchedule extends Activity {
               // TODO Auto-generated method stub
                           if (textedit.getText().toString().length() == 0 ) 
                              Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                          else 
+                          else if(TextUtils.isEmpty(sTime))
+                        	 Toast.makeText(getApplicationContext(), "시작 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
+                          else if(TextUtils.isEmpty(eTime))
+                        	 Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
+                          else
                           {
-                        	  if(TextUtils.isEmpty(sTime))
-                            	  Toast.makeText(getApplicationContext(), "시작 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
-                        	  else{
-                        		  if(TextUtils.isEmpty(eTime))
-                                	  Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
-                        		  else
-                        			  Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                        	  }	  
+                        	  SimpleDateFormat SFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                        	  SimpleDateFormat EFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                        	  try {
+								Date SDate = SFormat.parse(checkSTime);	//시작날짜
+								Date EDate = EFormat.parse(checkETime);	//종료날짜
+								Date CDate = new Date();				//현재날짜
+								
+								//1. 시작시간이 현재시간보다 더 이전일 수는 없다.
+								//2. 종료시간이 시작시간보다 빠를 수 없다.
+								if(SDate.getTime() - CDate.getTime() < 0)
+								{
+									Toast.makeText(getApplicationContext(), "시작시간이 현재시간 이후여야 합니다.", Toast.LENGTH_SHORT).show();
+								}
+								else if(EDate.getTime()-SDate.getTime()<0)
+								{
+									Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 업습니다.", Toast.LENGTH_SHORT).show();
+								}
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
                           }              
            }
         });
-        
-       /* Button btn_cancel = (Button)findViewById(R.id.plan_btn_cancel);
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-                        if (textedit.getText().toString().length() == 0 ) 
-                           Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        else 
-                        {
-                      	  if(TextUtils.isEmpty(sTime))
-                          	  Toast.makeText(getApplicationContext(), "시작 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
-                      	  else{
-                      		  if(TextUtils.isEmpty(eTime))
-                              	  Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
-                      		  else
-                      			  Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                      	  }	  
-                        }     
-        }
-         
-      });*/
      
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 		ratings.setStepSize((float) 1.0);
