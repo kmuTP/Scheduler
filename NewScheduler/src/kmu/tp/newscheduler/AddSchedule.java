@@ -61,15 +61,11 @@ public class AddSchedule extends Activity {
 					 if(isSTime==true)
 					 {
 						 sTime += String.format("일 %02d:%02d",hourOfDay,minute);
-						 checkSTime = String.format("%04d-%02d-%02d %02d:%02d",
-								 Calendar.YEAR,Calendar.MONTH,Calendar.DATE,Calendar.HOUR_OF_DAY,Calendar.MINUTE);
 						 txtLabel = (TextView) findViewById(R.id.txtTime);
 					 }
 					 else
 					 {
 						 eTime += String.format("일 %02d:%02d",hourOfDay,minute);
-						 checkETime = String.format("%04d-%02d-%02d %02d:%02d",
-								 Calendar.YEAR,Calendar.MONTH,Calendar.DATE,Calendar.HOUR_OF_DAY,Calendar.MINUTE);
 						 txtLabel = (TextView) findViewById(R.id.txtTime2);
 					 }
 					 txtLabel.setText(isSTime==true?sTime:eTime);
@@ -108,6 +104,7 @@ public class AddSchedule extends Activity {
 							sTime = String.valueOf(temp.getYear())+"년 "+
 									String.valueOf(temp.getMonth()+1)+"월 "+
 									String.valueOf(temp.getDayOfMonth());
+							
 							TimePickerDialog tdialog = new TimePickerDialog(AddSchedule.this,
 									timeSetListener,
 									calendar.get(Calendar.HOUR_OF_DAY),
@@ -178,13 +175,13 @@ public class AddSchedule extends Activity {
                         	 Toast.makeText(getApplicationContext(), "종료 날짜와 시간을 설정해주세요.", Toast.LENGTH_SHORT).show();
                           else
                           {
-                        	  SimpleDateFormat SFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-                        	  SimpleDateFormat EFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                        	  SimpleDateFormat SFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh:mm");
+                        	  SimpleDateFormat EFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh:mm");
                         	  try {
-								Date SDate = SFormat.parse(checkSTime);	//시작날짜
-								Date EDate = EFormat.parse(checkETime);	//종료날짜
+								Date SDate = SFormat.parse(sTime);	//시작날짜
+								Date EDate = EFormat.parse(eTime);	//종료날짜
 								Date CDate = new Date();				//현재날짜
-								
+								 
 								//1. 시작시간이 현재시간보다 더 이전일 수는 없다.
 								//2. 종료시간이 시작시간보다 빠를 수 없다.
 								if(SDate.getTime() - CDate.getTime() < 0)
@@ -194,6 +191,10 @@ public class AddSchedule extends Activity {
 								else if(EDate.getTime()-SDate.getTime()<0)
 								{
 									Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 업습니다.", Toast.LENGTH_SHORT).show();
+								}
+								else
+								{
+									Toast.makeText(getApplicationContext(), "김지현 그만졸아라.", Toast.LENGTH_SHORT).show();
 								}
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
