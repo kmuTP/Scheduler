@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -24,13 +25,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Toast;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class AddSchedule extends Activity {
 	
+	public static Activity add_activity;
 	long nTime = System.currentTimeMillis();
 	Calendar calendar = Calendar.getInstance();
 	TextView txtLabel;
@@ -73,9 +74,29 @@ public class AddSchedule extends Activity {
 			};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_schedule);
+		add_activity=AddSchedule.this;
+		Button btn_cancel = (Button)findViewById(R.id.plan_btn_cancel);
 		
+		btn_cancel.setOnClickListener(new Button.OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+		        case R.id.plan_btn_cancel:
+		        	Intent intent=new Intent(getApplicationContext(), DialogActivity.class);
+		            startActivity(intent);
+		            break;
+		 
+		        default:
+		            break;
+		        }
+		    }
+
+		
+			});
 		Button btn_startDate = (Button)findViewById(R.id.plan_btn_startDate);
 		
 		btn_startDate.setOnClickListener(new Button.OnClickListener() {

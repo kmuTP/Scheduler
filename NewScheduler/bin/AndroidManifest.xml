@@ -30,6 +30,11 @@
             android:name=".DetailSchedule"
             android:label="@string/title_activity_detail_schedule" >
         </activity>
+        <activity
+  		  android:name=".DialogActivity"
+ 		  android:theme="@android:style/Theme.Dialog">
+		</activity>
+        
     </application>
 
 </manifest>
