@@ -24,104 +24,96 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetailSchedule extends Activity {
-	
-	public String Subject,StartDate,EndDate,Contents;
-	public int no,isFavorited;
+
+	public String Subject, StartDate, EndDate, Contents;
+	public int no, isFavorited;
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_schedule);
 		final RatingBar ratings = (RatingBar) findViewById(R.id.todo_btn_setPriority);
-		
-		/*DB 읽어오기*/
-		final DBManager dbManager = new DBManager(getApplicationContext(),"schedule.db",null,1);
+
+		/* DB 읽어오기 */
+		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
 		SQLiteDatabase db = dbManager.getReadableDatabase();
-		final GlobalVariable gb = (GlobalVariable)getApplicationContext();
-		
-	
-		Cursor detail = db.rawQuery("select * from schedule where no = "+gb.detailNum,null);
-		/*DB 처리하기*/
-		if(detail.moveToFirst())
-		{
+		final GlobalVariable gb = (GlobalVariable) getApplicationContext();
+
+		Cursor detail = db.rawQuery("select * from schedule where no = " + gb.detailNum, null);
+		/* DB 처리하기 */
+		if (detail.moveToFirst()) {
 			no = detail.getInt(0);
 			Subject = detail.getString(1);
 			StartDate = detail.getString(2);
 			EndDate = detail.getString(3);
 			Contents = detail.getString(4);
-			isFavorited = detail.getInt(5);	//0 : Off, 1 : On
-			
-			TextView vSubject = (TextView)findViewById(R.id.todo_view_subject);
+			isFavorited = detail.getInt(5); // 0 : Off, 1 : On
+
+			TextView vSubject = (TextView) findViewById(R.id.todo_view_subject);
 			vSubject.setText(Subject);
-			
-			TextView vContent = (TextView)findViewById(R.id.todo_view_detail);
+
+			TextView vContent = (TextView) findViewById(R.id.todo_view_detail);
 			vContent.setText(Contents);
-			
-			//startDate와 endDate, 그리고 currentDate를 가진 Date형 3개를 만든다.
+
+			// startDate와 endDate, 그리고 currentDate를 가진 Date형 3개를 만든다.
 			SimpleDateFormat startDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			
+
 			try {
 				Date startTime = startDateFormat.parse(StartDate);
 				Date endTime = endDateFormat.parse(EndDate);
 				Date curTime = new Date();
-				
-				
-				
-				TextView vStatus = (TextView)findViewById(R.id.todo_status_schedule);
-				
-				if(startTime.getTime() < curTime.getTime())
+
+				TextView vStatus = (TextView) findViewById(R.id.todo_status_schedule);
+
+				if (startTime.getTime() < curTime.getTime())
 					vStatus.setText("시작 전");
-				else if(startTime.getTime() < curTime.getTime() && curTime.getTime()<=endTime.getTime())
+				else if (startTime.getTime() < curTime.getTime() && curTime.getTime() <= endTime.getTime())
 					vStatus.setText("진행 중");
-				else vStatus.setText("종료됨");
-				
+				else
+					vStatus.setText("종료됨");
+
 				Toast.makeText(getApplicationContext(), vStatus.getText(), Toast.LENGTH_LONG).show();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+
 		}
-		
+
 		ImageButton modifyBtn = (ImageButton) findViewById(R.id.todo_btn_modification);
-		modifyBtn.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				//Global Variable에 저장한다.
-				
+		modifyBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// Global Variable에 저장한다.
+
 				gb.modNum = gb.detailNum;
-				
+
 				Intent intent = new Intent(DetailSchedule.this, AddSchedule.class);
 				DetailSchedule.this.startActivity(intent);
 			}
 		});
-		
-		
+
 		ratings.setStepSize((float) 1.0);
-		if(isFavorited == 1)
-			ratings.setRating((float)1.0);
+		if (isFavorited == 1)
+			ratings.setRating((float) 1.0);
 		else
-			ratings.setRating((float)0.0);
+			ratings.setRating((float) 0.0);
 		LayerDrawable stars = (LayerDrawable) ratings.getProgressDrawable();
-		stars.getDrawable(2).setColorFilter(Color.YELLOW,PorterDuff.Mode.SRC_ATOP);
+		stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
 		ratings.setIsIndicator(false);
-		ratings.setOnTouchListener(new OnTouchListener(){
+		ratings.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				
-				if(event.getAction()==MotionEvent.ACTION_UP)
-				{
+
+				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// TODO Auto-generated method stub
-					if(ratings.getRating()==(float)0.0)
-						ratings.setRating((float)1.0);
+					if (ratings.getRating() == (float) 0.0)
+						ratings.setRating((float) 1.0);
 					else
-						ratings.setRating((float)0.0);
+						ratings.setRating((float) 0.0);
 				}
 				return true;
 			}
