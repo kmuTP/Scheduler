@@ -1,6 +1,7 @@
 package kmu.tp.newscheduler;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,11 +31,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
-		SQLiteDatabase db = dbManager.getReadableDatabase();
+		final SQLiteDatabase db = dbManager.getReadableDatabase();
 
 		
 		// 스케줄 목록 호출
-		Cursor scheduleLists = db.rawQuery("select * from schedule order by favorite desc, no desc", null);
+		Cursor scheduleLists = db.rawQuery("select * from schedule", null);
 		RelativeLayout container = (RelativeLayout) findViewById(R.id.scheduleListView);
 		// 목록이 있는지 확인한다.
 		if (scheduleLists.getCount() == 0) {
@@ -107,6 +108,35 @@ public class MainActivity extends Activity {
 		delMenuBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// 일정 삭제 View Load
+				AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+				
+				builder.setTitle("경고")
+				   .setMessage("정말로 모든 일정을 제거하시겠습니까?")
+				   .setCancelable(false)
+				   .setPositiveButton("예", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						//큰따옴표, 작은따옴표, 온점, 쉼표, -를 escape 한다.
+						
+						db.execSQL("delete from schedule");
+						Intent intent = new Intent(MainActivity.this, MainActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						MainActivity.this.startActivity(intent);
+					}
+				})
+				   .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				
+				AlertDialog dialog = builder.create();
+				dialog.show();
 			}
 		});
 	}

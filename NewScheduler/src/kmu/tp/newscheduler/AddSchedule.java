@@ -11,6 +11,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -39,7 +41,8 @@ public class AddSchedule extends Activity {
 	String sTime = "";
 	String eTime = "";
 	String checkSTime = "", checkETime = "";
-	String inputSubject, inputContent;
+	String inputSubject="", inputContent="";
+	int favorited=0;
 	SimpleDateFormat SFormat, EFormat;
 	boolean isSTime = true;
 
@@ -77,6 +80,7 @@ public class AddSchedule extends Activity {
 		setContentView(R.layout.add_schedule);
 
 		Button btn_startDate = (Button) findViewById(R.id.plan_btn_startDate);
+		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
 
 		btn_startDate.setOnClickListener(new Button.OnClickListener() {
 
@@ -172,10 +176,10 @@ public class AddSchedule extends Activity {
 						Date EDate = EFormat.parse(eTime); // 종료날짜
 						Date CDate = new Date(); // 현재날짜
 
-						// 1. 시작시간이 현재시간보다 더 이전일 수는 없다.
+						// 1. 종료시간이 현재시간보다 더 이전일 수는 없다.
 						
-						if (SDate.getTime() - CDate.getTime() < 0) {
-							Toast.makeText(getApplicationContext(), "시작시간은 현재시간 이후여야 합니다.", Toast.LENGTH_SHORT).show();
+						if (EDate.getTime() - CDate.getTime() < 0) {
+							Toast.makeText(getApplicationContext(), "종료시간은 현재시간 이후여야 합니다.", Toast.LENGTH_SHORT).show();
 						// 2. 종료시간이 시작시간보다 빠를 수 없다.
 						} else if (EDate.getTime() - SDate.getTime() < 0) {
 							Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 업습니다.", Toast.LENGTH_SHORT).show();
@@ -183,7 +187,7 @@ public class AddSchedule extends Activity {
 							// 일정을 등록 시작한다.
 							if(inputContent.length() == 0)
 							{
-								AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+								AlertDialog.Builder builder = new AlertDialog.Builder(AddSchedule.this);
 								
 								builder.setTitle("내용이 비어있음")
 									   .setMessage("일정을 공백으로 등록하시겠습니까?")
@@ -195,20 +199,27 @@ public class AddSchedule extends Activity {
 											// TODO Auto-generated method stub
 											//큰따옴표, 작은따옴표, 온점, 쉼표, -를 escape 한다.
 											
-											inputSubject = escapeString(inputSubject);
-											inputContent = escapeString(inputContent);
-											final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
-											SQLiteDatabase db = dbManager.getReadableDatabase();
-											
-											//등록한다.
-											db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values('"+inputSubject+"','"+sTime+"','"+eTime+"','신나게놀기','0');");
-											
-											
+											inputContent = " ";
+											insertData(ratings);
+				
+										}
+									})
+									   .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+										
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											// TODO Auto-generated method stub
+											if(inputContent.length() == 0)
+												inputContent = " ";
 										}
 									});
 								
 								AlertDialog dialog = builder.create();
 								dialog.show();
+							}
+							else
+							{
+								insertData(ratings);
 							}
 							// Toast.makeText(getApplicationContext(), ".",
 							// Toast.LENGTH_SHORT).show();
@@ -221,7 +232,7 @@ public class AddSchedule extends Activity {
 			}
 		});
 
-		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
+		
 		ratings.setStepSize((float) 1.0);
 		ratings.setRating((float) 0.0);
 		LayerDrawable stars = (LayerDrawable) ratings.getProgressDrawable();
@@ -271,12 +282,32 @@ public class AddSchedule extends Activity {
 	}
 
 	public String escapeString(String str) {
-		str = str.replaceAll("\"", "\\\"");
-		str = str.replaceAll("\'", "\\\'");
-		str = str.replaceAll(".", "\\.");
-		str = str.replaceAll(",", "\\,");
-		str = str.replaceAll("-", "\\-");
 
-		return str;
+		return DatabaseUtils.sqlEscapeString(str);
+	}
+	
+	public void insertData(RatingBar ratings)
+	{
+		inputSubject = escapeString(inputSubject);
+		inputContent = escapeString(inputContent);
+		float chkFavorited = ratings.getRating();
+		
+		if(chkFavorited == 1.0)
+			favorited = 1;
+		else
+			favorited = 0;
+		
+		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
+		SQLiteDatabase db = dbManager.getReadableDatabase();
+		
+		//등록한다.
+		db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+",'"+favorited+"');");
+		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
+		
+		Intent intent = new Intent(AddSchedule.this, MainActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		AddSchedule.this.startActivity(intent);
 	}
 }

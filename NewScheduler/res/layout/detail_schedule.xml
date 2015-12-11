@@ -91,12 +91,13 @@
 
         <TextView
             android:id="@+id/todo_status_schedule"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="66dp"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/todo_icon_state"
             android:gravity="center"
+            android:textColorHint="#ffffff"
             android:textSize="20dp" />
 
     </RelativeLayout>

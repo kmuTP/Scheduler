@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,6 +29,7 @@ public class DetailSchedule extends Activity {
 
 	public String Subject, StartDate, EndDate, Contents;
 	public int no, isFavorited;
+	Date startTime,endTime,curTime;
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -38,10 +41,11 @@ public class DetailSchedule extends Activity {
 
 		/* DB 읽어오기 */
 		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
-		SQLiteDatabase db = dbManager.getReadableDatabase();
+		final SQLiteDatabase db = dbManager.getReadableDatabase();
 		final GlobalVariable gb = (GlobalVariable) getApplicationContext();
+		final int currentNum = gb.detailNum;
 
-		Cursor detail = db.rawQuery("select * from schedule where no = " + gb.detailNum, null);
+		Cursor detail = db.rawQuery("select * from schedule where no = " + currentNum, null);
 		/* DB 처리하기 */
 		if (detail.moveToFirst()) {
 			no = detail.getInt(0);
@@ -58,29 +62,26 @@ public class DetailSchedule extends Activity {
 			vContent.setText(Contents);
 
 			// startDate와 endDate, 그리고 currentDate를 가진 Date형 3개를 만든다.
-			SimpleDateFormat startDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
+			SimpleDateFormat startDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
+			SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm");
 			try {
-				Date startTime = startDateFormat.parse(StartDate);
-				Date endTime = endDateFormat.parse(EndDate);
-				Date curTime = new Date();
-
+				startTime = startDateFormat.parse(StartDate);
+				endTime = endDateFormat.parse(EndDate);
+				curTime = new Date();
+				
 				TextView vStatus = (TextView) findViewById(R.id.todo_status_schedule);
 
-				if (startTime.getTime() < curTime.getTime())
-					vStatus.setText("시작 전");
+				if (curTime.getTime() < startTime.getTime())
+					vStatus.setText("시작전");
 				else if (startTime.getTime() < curTime.getTime() && curTime.getTime() <= endTime.getTime())
-					vStatus.setText("진행 중");
+					vStatus.setText("진행중");
 				else
 					vStatus.setText("종료됨");
-
-				Toast.makeText(getApplicationContext(), vStatus.getText(), Toast.LENGTH_LONG).show();
+				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				vContent.setText(e.toString());
 			}
-
 		}
 
 		ImageButton modifyBtn = (ImageButton) findViewById(R.id.todo_btn_modification);
@@ -110,10 +111,58 @@ public class DetailSchedule extends Activity {
 
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// TODO Auto-generated method stub
-					if (ratings.getRating() == (float) 0.0)
-						ratings.setRating((float) 1.0);
-					else
-						ratings.setRating((float) 0.0);
+					if (ratings.getRating() == (float) 0.0) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(DetailSchedule.this);
+
+						builder.setTitle("중요도").setMessage("중요 일정으로 등록하시겠습니까?").setCancelable(false)
+								.setPositiveButton("예", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								// 큰따옴표, 작은따옴표, 온점, 쉼표, -를 escape 한다.
+
+								ratings.setRating((float) 1.0);
+								db.execSQL("update schedule set favorite = 1 where no=" + currentNum);
+
+							}
+						}).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							}
+						});
+
+						AlertDialog dialog = builder.create();
+						dialog.show();
+
+					} else {
+						AlertDialog.Builder builder = new AlertDialog.Builder(DetailSchedule.this);
+
+						builder.setTitle("중요도").setMessage("중요 일정 등록을 해제하시겠습니까?").setCancelable(false)
+								.setPositiveButton("예", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								// 큰따옴표, 작은따옴표, 온점, 쉼표, -를 escape 한다.
+
+								ratings.setRating((float) 0.0);
+								db.execSQL("update schedule set favorite = 0 where no=" + currentNum);
+
+							}
+						}).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							}
+						});
+
+						AlertDialog dialog = builder.create();
+						dialog.show();
+					}
 				}
 				return true;
 			}
