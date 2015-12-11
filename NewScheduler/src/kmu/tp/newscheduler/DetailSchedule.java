@@ -95,6 +95,48 @@ public class DetailSchedule extends Activity {
 				DetailSchedule.this.startActivity(intent);
 			}
 		});
+		
+		ImageButton deleteBtn = (ImageButton) findViewById(R.id.todo_btn_delete);
+		deleteBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// Global Variable에 저장한다.
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(DetailSchedule.this);
+
+				builder.setTitle("삭제").setMessage("이 일정을 제거하시겠습니까?").setCancelable(false)
+						.setPositiveButton("예", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						db.execSQL("delete from schedule where no=" + currentNum);
+						Intent intent = new Intent(DetailSchedule.this, MainActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						DetailSchedule.this.startActivity(intent);
+					}
+				}).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+					}
+				});
+
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		});
+		
+		ImageButton backBtn = (ImageButton) findViewById(R.id.todo_btn_back);
+		backBtn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				// Global Variable에 저장한다.
+
+				Intent intent = new Intent(DetailSchedule.this, MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				DetailSchedule.this.startActivity(intent);
+			}
+		});
 
 		ratings.setStepSize((float) 1.0);
 		if (isFavorited == 1)
@@ -167,24 +209,5 @@ public class DetailSchedule extends Activity {
 				return true;
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.detail_schedule, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

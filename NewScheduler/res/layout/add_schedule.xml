@@ -50,10 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_view_name"
             android:layout_alignBottom="@+id/plan_view_name"
-            android:layout_toRightOf="@+id/plan_view_name"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/plan_view_name"
             android:ems="10"
-            android:hint="제목을 입력하시오 (20자 제한)."
+            android:hint="최대 20자"
             android:inputType="text"
             android:maxLength="20"
             android:paddingLeft="20px" >
@@ -79,7 +79,7 @@
             android:paddingLeft="20px"
             android:paddingRight="20px"
             android:paddingTop="15px"
-            android:text="시작"
+            android:text="시작일"
             android:textSize="20dp" />
 
         <Button
@@ -95,7 +95,7 @@
             android:text="설정" />
 
         <TextView
-            android:id="@+id/txtTime"
+            android:id="@+id/view_startTime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_btn_startDate"
@@ -113,7 +113,7 @@
             android:paddingLeft="20px"
             android:paddingRight="20px"
             android:paddingTop="15px"
-            android:text="종료"
+            android:text="종료일"
             android:textSize="20dp" />
 
         <Button
@@ -129,7 +129,7 @@
             android:text="설정" />
 
         <TextView
-            android:id="@+id/txtTime2"
+            android:id="@+id/view_EndTime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/plan_btn_endDate"
@@ -147,19 +147,22 @@
             android:paddingLeft="20px"
             android:paddingRight="20px"
             android:paddingTop="15px"
-            android:text="메모"
+            android:text="일정내용"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/plan_text_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_below="@+id/plan_view_content"
+            android:background="#e9e9e9"
             android:ems="10"
             android:hint="메모할 내용을  입력하시오."
             android:inputType="textMultiLine"
             android:minLines="3"
-            android:paddingLeft="20px" >
+            android:paddingLeft="20px"
+            android:textColor="#000000" >
 
             <requestFocus />
         </EditText>
@@ -174,28 +177,27 @@
         android:layout_alignParentLeft="true" >
           
        <TextView
-            android:id="@+id/plan_view_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
-            android:paddingTop="15px"
-            android:text="중요도"
-            android:textSize="20dp" />
+           android:id="@+id/plan_view_rating"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:paddingLeft="20px"
+           android:paddingRight="20px"
+           android:paddingTop="15px"
+           android:text="중요일정"
+           android:textSize="15sp" />
 
        <RatingBar
            android:id="@+id/plan_select_rating"
            style="?android:attr/ratingBarStyleIndicator"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_alignParentRight="true"
            android:layout_alignParentTop="true"
-           android:layout_marginRight="85dp"
+           android:layout_toRightOf="@+id/plan_view_rating"
            android:duplicateParentState="true"
-           android:rating="0" 
            android:minHeight="48dp"
-           android:numStars="1" />
+           android:numStars="1"
+           android:rating="0" />
               
         </RelativeLayout>
     

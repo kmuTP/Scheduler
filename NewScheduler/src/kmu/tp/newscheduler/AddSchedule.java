@@ -12,6 +12,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -38,10 +39,10 @@ public class AddSchedule extends Activity {
 	long nTime = System.currentTimeMillis();
 	Calendar calendar = Calendar.getInstance();
 	TextView txtLabel;
-	String sTime = "";
-	String eTime = "";
-	String checkSTime = "", checkETime = "";
-	String inputSubject="", inputContent="";
+	
+	
+	String sTime = "", eTime = "", checkSTime = "", checkETime = "", inputSubject="", inputContent="";
+	boolean isModifyMode = false;
 	int favorited=0;
 	SimpleDateFormat SFormat, EFormat;
 	boolean isSTime = true;
@@ -65,10 +66,10 @@ public class AddSchedule extends Activity {
 			calendar.set(Calendar.MINUTE, minute);
 			if (isSTime == true) {
 				sTime += String.format("일 %02d:%02d", hourOfDay, minute);
-				txtLabel = (TextView) findViewById(R.id.txtTime);
+				txtLabel = (TextView) findViewById(R.id.view_startTime);
 			} else {
 				eTime += String.format("일 %02d:%02d", hourOfDay, minute);
-				txtLabel = (TextView) findViewById(R.id.txtTime2);
+				txtLabel = (TextView) findViewById(R.id.view_EndTime);
 			}
 			txtLabel.setText(isSTime == true ? sTime : eTime);
 		}
@@ -78,10 +79,48 @@ public class AddSchedule extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_schedule);
-
+		
+		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
+		final SQLiteDatabase db = dbManager.getReadableDatabase();
+		final GlobalVariable gb = (GlobalVariable) getApplicationContext();
 		Button btn_startDate = (Button) findViewById(R.id.plan_btn_startDate);
 		final RatingBar ratings = (RatingBar) findViewById(R.id.plan_select_rating);
+		final EditText subjectForm = (EditText) findViewById(R.id.plan_text_name);
+		final EditText contentForm = (EditText) findViewById(R.id.plan_text_content);
+		
+		if(gb.modNum != 0)isModifyMode=true;
+		
+		if(isModifyMode == true)
+		{
+			//Toast.makeText(getApplicationContext(), "수정모드 돌입!.", Toast.LENGTH_SHORT).show();
+			//수정 모드일 경우 DB를 읽어온다.
+			Cursor content = db.rawQuery("select * from schedule where no = "+gb.modNum, null);
+			
+			if (content.moveToFirst()) {
+				String mSubject = content.getString(1);
+				String mStartDate = content.getString(2);
+				String mEndDate = content.getString(3);
+				String mContent = content.getString(4);
+				int mFavorite = content.getInt(5);
+				
+				//내용을 채워넣는다.
+				sTime = mStartDate;
+				eTime = mEndDate;
+				txtLabel = (TextView) findViewById(R.id.view_startTime);
+				txtLabel.setText(sTime);
+				txtLabel = (TextView) findViewById(R.id.view_EndTime);
+				txtLabel.setText(eTime);
+				subjectForm.setText(mSubject);
+				contentForm.setText(mContent);
+				if(mFavorite == 1)
+					ratings.setRating((float)1.0);
+				else
+					ratings.setRating((float)0.0);
+			}
+		}
 
+		
+		
 		btn_startDate.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
@@ -145,8 +184,7 @@ public class AddSchedule extends Activity {
 		});
 
 		Button btn_save = (Button) findViewById(R.id.plan_btn_save);
-		final EditText subjectForm = (EditText) findViewById(R.id.plan_text_name);
-		final EditText contentForm = (EditText) findViewById(R.id.plan_text_content);
+		
 		btn_save.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
@@ -182,7 +220,7 @@ public class AddSchedule extends Activity {
 							Toast.makeText(getApplicationContext(), "종료시간은 현재시간 이후여야 합니다.", Toast.LENGTH_SHORT).show();
 						// 2. 종료시간이 시작시간보다 빠를 수 없다.
 						} else if (EDate.getTime() - SDate.getTime() < 0) {
-							Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 업습니다.", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 없습니다.", Toast.LENGTH_SHORT).show();
 						} else {
 							// 일정을 등록 시작한다.
 							if(inputContent.length() == 0)
@@ -288,6 +326,10 @@ public class AddSchedule extends Activity {
 	
 	public void insertData(RatingBar ratings)
 	{
+		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
+		final SQLiteDatabase db = dbManager.getReadableDatabase();
+		final GlobalVariable gb = (GlobalVariable) getApplicationContext();
+		
 		inputSubject = escapeString(inputSubject);
 		inputContent = escapeString(inputContent);
 		float chkFavorited = ratings.getRating();
@@ -297,15 +339,19 @@ public class AddSchedule extends Activity {
 		else
 			favorited = 0;
 		
-		final DBManager dbManager = new DBManager(getApplicationContext(), "schedule.db", null, 1);
-		SQLiteDatabase db = dbManager.getReadableDatabase();
 		
-		//등록한다.
-		db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+",'"+favorited+"');");
-		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
-		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
-		Toast.makeText(getApplicationContext(), "insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+","+favorited+");", Toast.LENGTH_LONG).show();
 		
+		
+		if(isModifyMode == false)
+		{
+			db.execSQL("insert into schedule(subject,startdate,enddate,content,favorite) values("+inputSubject+",'"+sTime+"','"+eTime+"',"+inputContent+",'"+favorited+"');");
+			Toast.makeText(getApplicationContext(), "성공적으로 등록되었습니다.", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			db.execSQL("update schedule set subject="+inputSubject+",startdate='"+sTime+"',enddate='"+eTime+"',content="+inputContent+",favorite='"+favorited+"' where no="+gb.modNum);
+			Toast.makeText(getApplicationContext(), "성공적으로 수정되었습니다.", Toast.LENGTH_LONG).show();
+		}
 		Intent intent = new Intent(AddSchedule.this, MainActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		AddSchedule.this.startActivity(intent);

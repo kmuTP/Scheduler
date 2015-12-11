@@ -50,18 +50,20 @@
             android:layout_height="1px"
             android:background="#FFD8D8"
             android:visibility="visible" />
+
         <TextView
-	        android:id="@+id/todo_icon_explanation"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_marginTop="15dp"
-	        android:paddingLeft="20px"
-	        android:paddingRight="20px"
-	        android:paddingTop="15px"
-	        android:text="세부사항"
-	        android:textSize="20dp"
-	        android:gravity="center" />
+            android:id="@+id/todo_icon_explanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="15px"
+            android:text="일정내용"
+            android:textSize="20dp" />
+
     </RelativeLayout>
 
     <View
@@ -83,11 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" 
-            android:text="상태"
+            android:layout_centerVertical="true"
+            android:gravity="center"
             android:paddingLeft="17dp"
-            android:textSize="20dp"
-            android:gravity="center" />
+            android:text="현황"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/todo_status_schedule"

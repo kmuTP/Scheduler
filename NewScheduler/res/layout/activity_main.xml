@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/addSchedule"
-            android:text="일정삭제" />
+            android:text="모두삭제" />
 
     </RelativeLayout>
 
