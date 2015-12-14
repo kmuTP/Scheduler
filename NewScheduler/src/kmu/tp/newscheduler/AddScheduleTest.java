@@ -1,46 +1,29 @@
 package kmu.tp.newscheduler;
 
-import junit.framework.TestCase;
+import java.math.BigInteger;
+import java.sql.Date;
 
-public class AddScheduleTest extends TestCase {
+import org.junit.Assert;
+import org.junit.Test;
 
-	public AddScheduleTest(String name) {
-		super(name);
-	}
+import android.test.ActivityInstrumentationTestCase2;
 
-	protected static void tearDownAfterClass() throws Exception {
-	}
+public class AddScheduleTest extends ActivityInstrumentationTestCase2<AddSchedule> {
 
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
-
-	public void testOnCreateBundle() {
-		fail("Not yet implemented");
-	}
-
-	public void testSetLabel() {
-		fail("Not yet implemented");
-	}
-
-	public void testOnCreateOptionsMenuMenu() {
-		fail("Not yet implemented");
-	}
-
-	public void testOnOptionsItemSelectedMenuItem() {
-		fail("Not yet implemented");
-	}
-
-	public void testEscapeString() {
-		fail("Not yet implemented");
-	}
-
-	public void testInsertData() {
-		fail("Not yet implemented");
-	}
+   public AddScheduleTest() {
+      super(AddSchedule.class);
+   }
+   
+   @Test
+   public void getDiffTimeTest() {
+         AddSchedule diff = new AddSchedule();
+         BigInteger sLong = new BigInteger("201512120210");
+         BigInteger eLong = new BigInteger("201512120215");
+         Date testSDate = new Date(sLong.longValue());
+         Date testEDate = new Date(eLong.longValue());
+         Assert.assertTrue(0 < diff.getDiffTime(testSDate,testEDate)); 
+         Assert.assertTrue(0 > diff.getDiffTime(testEDate,testSDate)); 
+    }
+   
 
 }
