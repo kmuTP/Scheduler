@@ -46,6 +46,10 @@ public class AddSchedule extends Activity {
 	int favorited=0;
 	SimpleDateFormat SFormat, EFormat;
 	boolean isSTime = true;
+	
+	public long getDiffTime(Date start,Date end){
+		   return end.getTime()-start.getTime();
+		 }
 
 	DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -216,10 +220,10 @@ public class AddSchedule extends Activity {
 
 						// 1. 종료시간이 현재시간보다 더 이전일 수는 없다.
 						
-						if (EDate.getTime() - CDate.getTime() < 0) {
+						if (getDiffTime(EDate,CDate) < 0) {
 							Toast.makeText(getApplicationContext(), "종료시간은 현재시간 이후여야 합니다.", Toast.LENGTH_SHORT).show();
 						// 2. 종료시간이 시작시간보다 빠를 수 없다.
-						} else if (EDate.getTime() - SDate.getTime() < 0) {
+						} else if (getDiffTime(EDate,SDate) < 0) {
 							Toast.makeText(getApplicationContext(), "종료 시간이 시작 시간보다 빠를 수 없습니다.", Toast.LENGTH_SHORT).show();
 						} else {
 							// 일정을 등록 시작한다.
